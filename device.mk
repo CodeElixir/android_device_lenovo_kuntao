@@ -66,6 +66,11 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.webview.xml:system/etc/permissions/android.software.webview.xml \
     frameworks/base/location/lib/com.android.location.provider.xml:system/etc/permissions/com.android.location.provider.xml
 
+# Bluetooth
+PRODUCT_PACKAGES += \
+     android.hardware.bluetooth@1.0-impl \
+     android.hardware.bluetooth@1.0-service \
+
 # ANT+
 PRODUCT_PACKAGES += \
     AntHalService \
