@@ -206,7 +206,10 @@ PRODUCT_PACKAGES += \
     com.broadcom.nfc \
     NfcNci \
     Tag \
-    com.android.nfc_extras
+    com.android.nfc_extras 
+
+PRODUCT_PACKAGES += \
+android.hardware.nfc@1.0-impl
 
 # OMX
 PRODUCT_PACKAGES += \
