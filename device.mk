@@ -185,6 +185,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/usr/keylayout/synaptics_dsxv26.kl:system/usr/keylayout/synaptics_dsxv26.kl \
     $(LOCAL_PATH)/prebuilt/usr/keylayout/synaptics_rmi4_i2c.kl:system/usr/keylayout/synaptics_rmi4_i2c.kl
 
+ # Keymaster HAL
+ PRODUCT_PACKAGES += \
+     android.hardware.keymaster@3.0-impl
+
 # IPA Manager
 PRODUCT_PACKAGES += \
     ipacm \
