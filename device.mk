@@ -150,6 +150,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.renderscript@1.0-impl
 
+# Memtrack HAL
+PRODUCT_PACKAGES += \
+     android.hardware.memtrack@1.0-impl
+
 # Ebtables
 PRODUCT_PACKAGES += \
     ebtables \
