@@ -147,8 +147,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     fs_config_files
 
-# GPS(Lets use prebuilts for now)
-#PRODUCT_PACKAGES += \
+# GPS
+PRODUCT_PACKAGES += \
     gps.msm8953 \
     libcurl \
     libgnsspps
