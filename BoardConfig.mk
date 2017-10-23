@@ -245,5 +245,8 @@ WIFI_DRIVER_FW_PATH_AP := "ap"
 WIFI_DRIVER_FW_PATH_STA := "sta"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
+# Hack for build
+TARGET_BLOBS_BYPASS_SYMBOL_ERR := true
+
 # Inherit from the proprietary version
 -include vendor/lenovo/kuntao/BoardConfigVendor.mk
