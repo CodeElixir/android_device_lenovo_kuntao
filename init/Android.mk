@@ -20,8 +20,8 @@ include $(CLEAR_VARS)
 
 LOCAL_C_INCLUDES := system/core/init
 LOCAL_CPPFLAGS := -Wall -DANDROID_TARGET=\"$(TARGET_BOARD_PLATFORM)\"
-LOCAL_MODULE := init_kuntao
 LOCAL_MODULE_TAGS := optional
 LOCAL_SRC_FILES := init_kuntao.cpp
+LOCAL_MODULE := libinit_kuntao
 
 include $(BUILD_STATIC_LIBRARY)
