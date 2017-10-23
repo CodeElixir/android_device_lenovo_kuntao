@@ -1,0 +1,3 @@
+add_lunch_combo aosp_kuntao-user
+add_lunch_combo aosp_kuntao-userdebug
+add_lunch_combo aosp_kuntao-eng
