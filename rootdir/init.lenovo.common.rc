@@ -66,59 +66,6 @@ on post-fs
     chown mot_tcmd root /sys/class/power_supply/ext-charger/usb_otg
     chmod 0664  /sys/class/power_supply/ext-charger/usb_otg
 
-service oem-hw-sh /init.oem.hw.sh
-    seclabel u:r:init_hw:s0
-    class core
-    user root
-    oneshot
-
-# Power up to suspend
-on property:tcmd.suspend=1
-    stop surfaceflinger
-    stop zygote
-    stop sensors
-    write /sys/kernel/factory_gsbi12_mode/install 1
-    setprop debug.sf.nobootanimation 1
-
-# Normal to suspend
-on property:tcmd.suspend=2
-    stop surfaceflinger
-    stop zygote
-    stop sensors
-    write /sys/kernel/factory_gsbi12_mode/install 1
-    setprop debug.sf.nobootanimation 1
-    stop wlan_logging
-
-service tcmd /system/bin/tcmd
-    class core
-#  Total number of supplementary groups below is 31 now. Limit defined in init.h is 32.
-#  Please update the current number if you add more groups.
-    group mot_tcmd radio input system log camera graphics sdcard_r sdcard_rw audio inet bluetooth wifi compass net_bt_admin mount net_raw net_admin media shell nfc qcom_diag cache media_rw drmrpc mot_tpapi
-    socket local_tcmd stream 0660 mot_tcmd mot_tcmd
-    socket batch_socket stream 0600 mot_tcmd mot_tcmd
-    oneshot
-    disabled
-
-service tcmdhelp /system/bin/tcmdhelp
-    class main
-    socket tcmdhelp stream 0600 mot_tcmd mot_tcmd
-    oneshot
-    disabled
-
-on property:tcmd.start_tcmdhelp=1
-    start tcmdhelp
-
-# Write utag from property
-service mbm_spy /system/bin/mbm_spy
-    class late_start
-    user system
-    group system
-    oneshot
-    disabled
-
-on property:sys.boot_completed=1
-    start mbm_spy
-
 on boot
 # access permission for rgb led
     chmod 0664	/sys/class/leds/rgb/brightness
@@ -133,3 +80,48 @@ on boot
     chown system system /sys/class/graphics/fb0/acl_mode
 # Change ownership for for seed feature
     chown system system /sys/class/graphics/fb0/color_profile
+
+#lenovo-sw wengjun1 add 20160504 begin
+    chown system system /sys/board_properties/tpd_glove_status
+    chown system system /sys/board_properties/tpd_suspend_status
+    chown system system /dev/rmi0
+    chmod 0664 /sys/board_properties/tpd_suspend_status
+    chmod 0664 /sys/board_properties/tpd_glove_status
+    chmod 0660 /dev/rmi0
+#lenovo-sw wengjun1 add 20160504 end
+
+    chmod 0755 /system/bin/vfmService
+    chmod 0660 /dev/vfsspi
+    chown system system /dev/vfsspi
+    mkdir /data/validity 0775 system system
+    mkdir /dev/validity 0775 system system
+    chmod 0660 /sys/bus/platform/devices/soc:fingerprint@0/shutdown
+    chown system system /sys/bus/platform/devices/soc:fingerprint@0/shutdown
+    start fingerprintd
+
+on property:sys.listeners.registered=true
+    start vfmservice
+
+service vfmservice /system/bin/vfmService
+    user system
+    group system
+    class main
+    disabled
+
+service fingerprintd /system/bin/fingerprintd
+    class late_start
+    user system
+    group system sdcard_rw
+    system system
+    writepid /dev/cpuset/system-background/tasks
+
+#Lenovo-sw huangzhen6 added 20160125 begin
+#service qseeopt /system/bin/qseecom_opt_handler
+#    class main
+#    user system
+#    disabled
+#    oneshot
+
+#on property:sys.boot_completed=1
+#    start qseeopt
+#Lenovo-sw huangzhen6 added 20160125 end
