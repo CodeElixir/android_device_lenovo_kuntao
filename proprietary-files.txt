@@ -25,7 +25,6 @@ etc/acdbdata/QRD/QRD_Speaker_cal.acdb
 
 # Camera
 bin/mm-qcamera-daemon
-bin/mm-qcamera-app
 etc/camera/lenovo_kuntao_camera.xml
 lib/hw/camera.msm8953.so
 lib/libmmjpeg_interface.so
@@ -38,7 +37,7 @@ lib/libqomx_core.so
 lib/libarcsoft_hdr.so
 lib/libarcsoft_beautyshot.so
 lib/libarcsoft_night_shot.so
-lib/libarcsoft_panorama_burstcapture.s
+lib/libarcsoft_panorama_burstcapture.so
 vendor/lib/lib-imscamera.so
 vendor/lib/lib-imsvt.so
 vendor/lib/libavenhancements.so
@@ -112,6 +111,12 @@ vendor/lib/libubifocus.so
 vendor/lib/libwfdrtsp.so
 vendor/lib/mmi_camera.so
 vendor/lib/rfsa/adsp/libfastcvadsp.so
+vendor/lib/libmmipl.so
+vendor/lib/libChamomilePA.so
+vendor/lib/libflash_pmic.so
+vendor/lib/liboptizoom.so
+-vendor/lib/libts_detected_face_hal.so
+-vendor/lib/libts_face_beautify_hal.so
 
 # Camera sensors
 vendor/lib/libmmcamera2_dcrf.so
@@ -305,11 +310,13 @@ lib/libsynaFpTestHal.so
 lib/libvcsfp.so
 lib/libvfmClient.so
 lib/libvfmtztransport.so
+lib/libvalAuth.so
 lib64/libsynaFpTestHal.so
 lib64/libvcsfp.so
 lib64/libvfmClient.so
 lib64/libvfmAuth.so
 lib64/libvfmtztransport.so
+lib64/libvalAuth.so
 
 # Fingerprint Firmware
 etc/firmware/synaptics-s3508-16060806-kuntao.tdat
@@ -324,6 +331,9 @@ etc/firmware/synaptics-s3508sga-16071507-kuntao.tdat
 etc/firmware/synaptics-s3508sga-16080201-kuntao.tdat
 etc/firmware/synaptics-s3508sga-16081202-kuntao.tdat
 etc/firmware/synaptics-s3508sga-16082202-kuntao.tdat
+
+# EMMC Firmware
+etc/firmware/emmc_ffu_15_RX14MB.fw 
 
 # HBTP
 vendor/bin/hbtp_daemon
@@ -348,6 +358,10 @@ bin/irsc_util
 etc/data/dsi_config.xml
 etc/data/netmgr_config.xml
 etc/permissions/qti_permissions.xml
+lib/libQseeOptService.so
+lib64/libQseeOptService.so
+vendor/lib/libqti-wl.so
+vendor/lib/libquipc_os_api.so
 vendor/lib/libdiag.so
 vendor/lib/libdsi_netctrl.so
 vendor/lib/libdsutils.so
@@ -384,6 +398,13 @@ vendor/lib64/libqmi_csi.so
 vendor/lib64/libqmi_encdec.so
 vendor/lib64/libqmiservices.so
 vendor/lib64/libsmemlog.so
+vendor/lib64/libqti-wl.so
+vendor/lib64/libquipc_os_api.so
+
+# Firmware
+etc/firmware/leia_pfp_470.fw
+etc/firmware/leia_pm4_470.fw
+etc/firmware/tas2555_uCDSP.bin
 
 # Radio
 -app/QtiTelephonyService/QtiTelephonyService.apk
@@ -403,6 +424,10 @@ bin/port-bridge
 etc/permissions/embms.xml
 etc/permissions/qcrilhook.xml
 etc/permissions/telephonyservice.xml
+lib/libmotext_inf.so
+lib64/libqmimotext.so
+lib64/libmotext_inf.so
+lib64/libtzssm.so
 vendor/qcril.db
 vendor/bin/qti
 vendor/lib/libconfigdb.so
@@ -416,11 +441,15 @@ vendor/lib/libril-qc-ltedirectdisc.so
 vendor/lib/libril-qc-radioconfig.so
 vendor/lib/librilqmiservices.so
 vendor/lib/libsettings.so
+vendor/lib/libsubsystem_control.so
+vendor/lib/libSubSystemShutdown.so
+vendor/lib/libxml.so
 vendor/lib/libsystem_health_mon.so
 vendor/lib64/libconfigdb.so
 vendor/lib64/liblqe.so
 vendor/lib64/libmdmdetect.so
 vendor/lib64/libnetmgr.so
+vendor/lib64/libril-qc-ltedirectdisc.so
 vendor/lib64/libril-qc-qmi-1.so
 vendor/lib64/libril-qcril-hook-oem.so
 vendor/lib64/libsystem_health_mon.so
@@ -429,6 +458,10 @@ vendor/lib64/libril-qc-radioconfig.so
 vendor/lib64/librilqmiservices.so
 vendor/lib64/libsettings.so
 vendor/lib64/libsystem_health_mon.so
+vendor/lib64/libsubsystem_control.so
+vendor/lib64/libSubSystemShutdown.so
+vendor/lib64/libxml.so
+
 
 # Radio - IMS
 bin/ims_rtp_daemon
@@ -486,6 +519,7 @@ vendor/lib/sensors.ssc.so
 vendor/lib/sensors.alsps.so
 vendor/lib/sensors.st.so
 vendor/lib/libmag_akm.so
+vendor/lib/lib_acgdaemon.so
 vendor/lib64/hw/activity_recognition.msm8953.so
 vendor/lib64/libsensor1.so
 vendor/lib64/libsensor_reg.so
@@ -494,6 +528,7 @@ vendor/lib64/sensors.ssc.so
 vendor/lib64/sensors.alsps.so
 vendor/lib64/sensors.st.so
 vendor/lib64/libmag_akm.so
+vendor/lib64/lib_acgdaemon.so
 
 # Thermal
 vendor/bin/thermal-engine
@@ -501,11 +536,14 @@ vendor/lib/libthermalclient.so
 vendor/lib64/libthermalclient.so
 vendor/lib64/libthermalioctl.so
 
+# TAS
+lib/libTAS2555ftc.so
+lib64/libTAS2555ftc.so
+
 # Widevine
 vendor/lib/libWVStreamControlAPI_L3.so
 vendor/lib/libwvdrm_L3.so
 vendor/lib/mediadrm/libwvdrmengine.so
-
 
 # Peripheral manager
 bin/pm-service
@@ -514,7 +552,7 @@ vendor/lib/libperipheral_client.so
 vendor/lib64/libperipheral_client.so
 
 # Postprocessing
--framework/com.qti.snapdragon.sdk.display.jar|e6387246d96376fd832fdcf14b65e149b6333bb2
+-framework/com.qti.snapdragon.sdk.display.jar
 etc/permissions/com.qti.snapdragon.sdk.display.xml
 vendor/bin/mm-pp-dpps
 vendor/lib/libdisp-aba.so
@@ -619,6 +657,52 @@ vendor/lib/rfsa/adsp/libscveCleverCapture_skel.so
 vendor/lib/rfsa/adsp/libscveObjectSegmentation_skel.so
 vendor/lib/rfsa/adsp/libscveT2T_skel.so
 vendor/lib/rfsa/adsp/libscveTextReco_skel.so
+
+# SCVE
+vendor/lib/libscveBlobDescriptor.so
+vendor/lib/libscveBlobDescriptor_stub.so
+vendor/lib/libscveCleverCapture.so
+vendor/lib/libscveCleverCapture_stub.so
+vendor/lib/libscveCommon.so
+vendor/lib/libscveCommon_stub.so
+vendor/lib/libscveFaceRecognition.so
+vendor/lib/libscveImageCloning.so
+vendor/lib/libscveImageCorrection.so
+vendor/lib/libscveImageRemoval.so
+vendor/lib/libscveMotionVector.so
+vendor/lib/libscveObjectMatting.so
+vendor/lib/libscveObjectMatting_stub.so
+vendor/lib/libscveObjectSegmentation.so
+vendor/lib/libscveObjectSegmentation_stub.so
+vendor/lib/libscveObjectTracker.so
+vendor/lib/libscveObjectTracker_stub.so
+vendor/lib/libscvePanorama.so
+vendor/lib/libscvePanorama_lite.so
+vendor/lib/libscveTextReco.so
+vendor/lib/libscveTextRecoPostProcessing.so
+vendor/lib/libscveTextReco_stub.so
+vendor/lib64/libscveBlobDescriptor.so
+vendor/lib64/libscveBlobDescriptor_stub.so
+vendor/lib64/libscveCleverCapture.so
+vendor/lib64/libscveCleverCapture_stub.so
+vendor/lib64/libscveCommon.so
+vendor/lib64/libscveCommon_stub.so
+vendor/lib64/libscveFaceRecognition.so
+vendor/lib64/libscveImageCloning.so
+vendor/lib64/libscveImageCorrection.so
+vendor/lib64/libscveImageRemoval.so
+vendor/lib64/libscveMotionVector.so
+vendor/lib64/libscveObjectMatting.so
+vendor/lib64/libscveObjectMatting_stub.so
+vendor/lib64/libscveObjectSegmentation.so
+vendor/lib64/libscveObjectSegmentation_stub.so
+vendor/lib64/libscveObjectTracker.so
+vendor/lib64/libscveObjectTracker_stub.so
+vendor/lib64/libscvePanorama.so
+vendor/lib64/libscvePanorama_lite.so
+vendor/lib64/libscveTextReco.so
+vendor/lib64/libscveTextRecoPostProcessing.so
+vendor/lib64/libscveTextReco_stub.so
 
 # IPACM
 bin/ipacm-diag
@@ -757,10 +841,12 @@ lib/libloc_api_v02.so
 lib/libloc_ds_api.so
 lib64/libloc_api_v02.so
 lib64/libloc_ds_api.so
-vendor/bin/slim_daemon
 vendor/lib/hw/flp.default.so
+vendor/lib/libDRPlugin.so
 vendor/lib/libalarmservice_jni.so
 vendor/lib/libdataitems.so
+vendor/lib/libdrplugin_client.so
+vendor/lib/libevent_observer.so
 vendor/lib/libflp.so
 vendor/lib/libgeofence.so
 vendor/lib/libizat_core.so
@@ -829,6 +915,8 @@ vendor/lib64/libdpmtcm.so
 
 # Charger
 bin/hvdcp_opti
+bin/smart_charger
+
 
 # CNE
 -framework/ConnectivityExt.jar
