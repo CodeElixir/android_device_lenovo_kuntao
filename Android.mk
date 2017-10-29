@@ -69,11 +69,10 @@ ALL_DEFAULT_INSTALLED_MODULES += $(IMS_SYMLINKS)
 
 
 FIRMWARE_ADSP_IMAGES := \
-    adsp.b00 adsp.b01 adsp.b02 adsp.b03 adsp.b04 adsp.b05 adsp.b06 \
-    adsp.b07 adsp.b08 adsp.b09 adsp.b10 adsp.b11 adsp.b12 adsp.b13 \
-    adsp.mdt
+    adsp.b00 adsp.b01 adsp.b02 adsp.b03 adsp.b04 adsp.b05 adsp.b06 adsp.b07 \
+    adsp.b08 adsp.b09 adsp.b10 adsp.b11 adsp.b12 adsp.b13 adsp.mdt
 
-FIRMWARE_ADSP_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(FIRMWARE_FIRMWARE_MODEM_IMAGES)))
+FIRMWARE_ADSP_SYMLINKS := $(addprefix $(TARGET_OUT_VENDOR)/firmware/,$(notdir $(FIRMWARE_ADSP_IMAGES)))
 $(FIRMWARE_ADSP_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	@echo "ADSP Firmware link: $@"
 	@mkdir -p $(dir $@)
