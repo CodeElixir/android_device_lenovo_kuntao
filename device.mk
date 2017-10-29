@@ -16,11 +16,6 @@
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-$(call inherit-product, vendor/lenovo/kuntao/kuntao-vendor.mk)
-
-# Common stuff
-$(call inherit-product, device/lenovo/kuntao/configs/common.mk)
-
 LOCAL_PATH := device/lenovo/kuntao
 
 # Overlays
@@ -42,7 +37,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
     frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
-    frameworks/native/data/etc/android.hardware.consumerir.xml:system/etc/permissions/android.hardware.consumerir.xml \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:system/etc/permissions/android.hardware.fingerprint.xml \
     frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml \
@@ -69,7 +63,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
     frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
     frameworks/base/nfc-extras/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
-    packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml \
     frameworks/native/data/etc/android.software.webview.xml:system/etc/permissions/android.software.webview.xml \
     frameworks/base/location/lib/com.android.location.provider.xml:system/etc/permissions/com.android.location.provider.xml
 
@@ -79,6 +72,10 @@ PRODUCT_PACKAGES += \
     com.dsi.ant.antradio_library \
     libantradio
 
+# DRM
+PRODUCT_PACKAGES += \
+    libprotobuf-cpp-lite
+    
 # Audio
 PRODUCT_PACKAGES += \
     audiod \
@@ -114,12 +111,7 @@ PRODUCT_COPY_FILES += \
 	$(TOPDIR)frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:/system/etc/r_submix_audio_policy_configuration.xml \
 	$(TOPDIR)frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:/system/etc/usb_audio_policy_configuration.xml
 
-# Camera (Lets use prebuilt for now)
-#PRODUCT_PACKAGES += \
-    camera.msm8953 \
-    libmm-qcamera 
-
-# Display
+ # Display
 PRODUCT_PACKAGES += \
     copybit.msm8953 \
     gralloc.msm8953 \
@@ -159,7 +151,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/gps/izat.conf:system/etc/izat.conf \
     $(LOCAL_PATH)/prebuilt/etc/gps/lowi.conf:system/etc/lowi.conf \
     $(LOCAL_PATH)/prebuilt/etc/gps/sap.conf:system/etc/sap.conf \
-    $(LOCAL_PATH)/prebuilt/etc/gps/xtwifi.conf:system/etc/xtwifi.conf \
+    $(LOCAL_PATH)/prebuilt/etc/gps/xtwifi.conf:system/etc/xtwifi.conf 
 
 # Input
 PRODUCT_COPY_FILES += \
@@ -182,10 +174,6 @@ PRODUCT_COPY_FILES += \
 # IRSC
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sec_config:system/etc/sec_config
-
-# Lights(Lets use prebuilt for now)
-#PRODUCT_PACKAGES += \
-    lights.msm8953
 
 # Media 
 PRODUCT_COPY_FILES += \
@@ -248,8 +236,6 @@ PRODUCT_PACKAGES += \
     ueventd.qcom.rc
 
 PRODUCT_PACKAGES += \
-	init.class_main.sh \
-	init.oem.hw.sh \
 	init.qcom.early_boot.sh \
 	init.qcom.sensors.sh \
 	init.qcom.sh
@@ -265,14 +251,14 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sensors/hals.conf:system/etc/sensors/hals.conf \
     $(LOCAL_PATH)/configs/sensors/sensor_def_qcomdev.conf:system/etc/sensors/sensor_def_qcomdev.conf
 
-#(Lets use prebuilt for now)
-# PRODUCT_PACKAGES += \
-    sensors.msm8953
-
 # Thermal
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/thermal-engine.conf:system/etc/thermal-engine.conf
 
+# Charger
+PRODUCT_PACKAGES += \
+    charger_res_images
+    
 # Wifi
 PRODUCT_PACKAGES += \
     libqsap_sdk \
@@ -283,10 +269,6 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_supplicant.conf \
     wcnss_service
-
-#PRODUCT_PACKAGES += \
-    p2p_supplicant_overlay.conf \
-    wpa_supplicant_overlay.conf
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/wifi/hostapd.accept:system/etc/hostapd/hostapd.accept \
@@ -299,3 +281,24 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/wifi/fstman.ini:system/etc/wifi/fstman.ini \
     $(LOCAL_PATH)/prebuilt/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
     $(LOCAL_PATH)/prebuilt/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini
+
+ADDITIONAL_DEFAULT_PROPERTIES += \
+	ro.secure=0 \
+	ro.allow.mock.location=1 \
+	ro.debuggable=1 \
+	ro.adb.secure=0 \
+	persist.sys.usb.config=mtp,adb
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.service.adb.enable=1 \
+    persist.service.debuggable=1 \
+    persist.sys.root_access=0 
+
+# Common stuff
+$(call inherit-product, device/lenovo/kuntao/configs/common.mk)
+
+# HWUI memory limits
+$(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-3072-hwui-memory.mk)
+
+# Vendor
+$(call inherit-product, vendor/lenovo/kuntao/kuntao-vendor.mk)
