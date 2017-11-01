@@ -71,6 +71,7 @@ on boot
     chmod 0664	/sys/class/leds/rgb/brightness
     chown system system /sys/class/leds/rgb/brightness
     chown system system /sys/class/leds/rgb/blink
+    chown system system /sys/class/leds/rgb/led_time
 
 # Change ownership for Dynamic-CABC feature
     chown system system /sys/class/graphics/fb0/cabc_mode
