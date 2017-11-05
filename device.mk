@@ -279,7 +279,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
      android.hardware.power@1.0-impl
 
-
 # Lights
 PRODUCT_PACKAGES += \
     lights.msm8953
@@ -287,7 +286,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-impl \
     android.hardware.light@2.0-service 
-    
+
 # QMI
 PRODUCT_PACKAGES += \
     libjson
@@ -361,7 +360,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
     $(LOCAL_PATH)/prebuilt/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini
 
-ADDITIONAL_DEFAULT_PROPERTIES += \
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	ro.secure=0 \
 	ro.allow.mock.location=1 \
 	ro.debuggable=1 \
