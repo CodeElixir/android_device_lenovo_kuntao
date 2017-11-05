@@ -328,6 +328,7 @@ PRODUCT_PACKAGES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
+	android.hardware.wifi@1.0-service \
     libqsap_sdk \
     libQWiFiSoftApCfg \
     libwpa_client \
@@ -335,7 +336,9 @@ PRODUCT_PACKAGES += \
     dhcpcd.conf \
     wpa_supplicant \
     wpa_supplicant.conf \
-    wcnss_service
+    wcnss_service \
+    wificond \
+    wifilogd 
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/wifi/hostapd.accept:system/etc/hostapd/hostapd.accept \
