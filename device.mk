@@ -123,6 +123,13 @@ PRODUCT_COPY_FILES += \
 	$(TOPDIR)frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:/system/etc/r_submix_audio_policy_configuration.xml \
 	$(TOPDIR)frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:/system/etc/usb_audio_policy_configuration.xml
 
+ # Camera HAL
+PRODUCT_PACKAGES += \
+     camera.device@1.0-impl \
+     camera.device@3.2-impl \
+     android.hardware.camera.provider@2.4-impl \
+     android.hardware.camera.provider@2.4-service
+
  # Display
 PRODUCT_PACKAGES += \
     copybit.msm8953 \
