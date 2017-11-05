@@ -17,7 +17,7 @@
 $(call inherit-product, device/lenovo/kuntao/full_kuntao.mk)
 
 # Inherit Lineage's custom product configuration
-$(call inherit-product, vendor/cm/config/common_full_phone.mk)
+$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 PRODUCT_NAME := lineage_kuntao
 BOARD_VENDOR := Lenovo
