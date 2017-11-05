@@ -44,6 +44,8 @@ TARGET_BOARD_PLATFORM_GPU := qcom-adreno506
 TARGET_BOARD_SUFFIX := _64
 TARGET_USES_64_BIT_BINDER := true
 
+TARGET_FS_CONFIG_GEN += $(LOCAL_PATH)/config.fs
+
 # Kernel
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci 
