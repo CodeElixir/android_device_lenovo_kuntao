@@ -255,7 +255,7 @@ PRODUCT_PACKAGES += \
     com.android.nfc_extras 
 
 PRODUCT_PACKAGES += \
-android.hardware.nfc@1.0-impl
+	android.hardware.nfc@1.0-impl
 
 # OMX
 PRODUCT_PACKAGES += \
@@ -279,6 +279,15 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
      android.hardware.power@1.0-impl
 
+
+# Lights
+PRODUCT_PACKAGES += \
+    lights.msm8953
+
+PRODUCT_PACKAGES += \
+    android.hardware.light@2.0-impl \
+    android.hardware.light@2.0-service 
+    
 # QMI
 PRODUCT_PACKAGES += \
     libjson
