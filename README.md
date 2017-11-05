@@ -1,7 +1,7 @@
 Lenovo P2
 ==============
 
-This branch is for building Android Nougat.
+This branch is for building Android Oreo.
 
 # About Device
 
