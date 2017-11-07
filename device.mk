@@ -83,7 +83,18 @@ PRODUCT_PACKAGES += \
 # DRM
 PRODUCT_PACKAGES += \
     libprotobuf-cpp-lite
-    
+
+# RIL
+PRODUCT_PACKAGES += \
+    libprotobuf-cpp-full \
+    librmnetctl \
+    libxml2
+
+PRODUCT_PACKAGES += \
+    android.system.net.netd@1.0 \
+    libandroid_net \
+    netutils-wrapper-1.0
+
 # Audio
 PRODUCT_PACKAGES += \
     audiod \
