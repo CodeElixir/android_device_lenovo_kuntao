@@ -132,10 +132,8 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_SHOW_PERCENTAGE := true
 
 # CMHW
-#BOARD_USES_CYANOGEN_HARDWARE := true
-#BOARD_HARDWARE_CLASS += \
-    hardware/cyanogen/cmhw \
-    device/lenovo/kuntao/cmhw
+BOARD_HARDWARE_CLASS += \
+    device/lenovo/kuntao/lineagehw
 #TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/enable_dt2w"
 
 # CNE / DPM
