@@ -98,7 +98,6 @@ on boot
     mkdir /dev/validity 0775 system system
     chmod 0660 /sys/bus/platform/devices/soc:fingerprint@0/shutdown
     chown system system /sys/bus/platform/devices/soc:fingerprint@0/shutdown
-    start fingerprintd
 
 on property:sys.listeners.registered=true
     start vfmservice
@@ -108,13 +107,6 @@ service vfmservice /system/bin/vfmService
     group system
     class main
     disabled
-
-service fingerprintd /system/bin/fingerprintd
-    class late_start
-    user system
-    group system sdcard_rw
-    system system
-    writepid /dev/cpuset/system-background/tasks
 
 #Lenovo-sw huangzhen6 added 20160125 begin
 #service qseeopt /system/bin/qseecom_opt_handler
