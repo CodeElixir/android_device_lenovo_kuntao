@@ -148,7 +148,8 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm8953 \
     memtrack.msm8953 \
     liboverlay \
-    libtinyxml
+    libtinyxml \
+    libdisplayconfig 
 
 # Graphic HAL
 PRODUCT_PACKAGES += \
