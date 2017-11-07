@@ -127,7 +127,7 @@ BOARD_QTI_CAMERA_32BIT_ONLY := true
 TARGET_TS_MAKEUP := true
 
 # Charger
-#BACKLIGHT_PATH := /sys/class/leds/lcd-backlight/brightness
+BACKLIGHT_PATH := /sys/class/leds/lcd-backlight/brightness
 BOARD_CHARGER_ENABLE_SUSPEND := true
 #BOARD_CHARGER_DISABLE_INIT_BLANK := true
 BOARD_CHARGER_SHOW_PERCENTAGE := true
@@ -169,7 +169,7 @@ OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 TARGET_CONTINUOUS_SPLASH_ENABLED := true
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_ION := true
-#TARGET_USES_NEW_ION_API := true
+TARGET_USES_NEW_ION_API := true
 USE_OPENGL_RENDERER := true
 
 # Filesystem
@@ -242,6 +242,9 @@ TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/fstab.qcom
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += $(LOCAL_PATH)/sepolicy
+
+# Seccomp filter
+BOARD_SECCOMP_POLICY := $(LOCAL_PATH)/seccomp
 
 # Wi-Fi
 BOARD_HAS_QCOM_WLAN := true
