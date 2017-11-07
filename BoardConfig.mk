@@ -237,9 +237,6 @@ TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/fstab.qcom
 include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += $(LOCAL_PATH)/sepolicy
 
-# Seccomp filter
-BOARD_SECCOMP_POLICY := $(LOCAL_PATH)/seccomp
-
 # Wi-Fi
 BOARD_HAS_QCOM_WLAN := true
 BOARD_HAS_QCOM_WLAN_SDK := true
