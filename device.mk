@@ -286,7 +286,9 @@ PRODUCT_PACKAGES += \
     libOmxVdec \
     libOmxVenc \
     libstagefrighthw \
-    libOmxVidcCommon
+    libOmxVidcCommon \
+    libextmedia_jni \
+    libhypv_intercept 
 
 # Power
 PRODUCT_PACKAGES += \
