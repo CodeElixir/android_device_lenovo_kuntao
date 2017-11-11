@@ -329,8 +329,8 @@
     <bool name="config_batterySdCardAccessibility">true</bool>
 
     <!-- Whether a software navigation bar should be shown. NOTE: in the future this may be
-         autodetected from the Configuration. -->
-    <bool name="config_showNavigationBar">true</bool>
+         autodetected from the Configuration. 
+    <bool name="config_showNavigationBar">true</bool> -->
 
     <!-- Flag indicating which package name can access the persistent data partition -->
     <string name="config_persistentDataPackageName" translatable="false">com.google.android.gms</string>
