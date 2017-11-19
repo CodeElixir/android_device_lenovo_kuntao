@@ -223,7 +223,6 @@ TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
 
 # Qualcomm Support
 BOARD_USES_QCOM_HARDWARE := true
-BOARD_USES_QC_TIME_SERVICES := true
 TARGET_USE_SDCLANG := true
 
 # RIL
