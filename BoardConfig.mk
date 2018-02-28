@@ -155,6 +155,9 @@ TARGET_HW_DISK_ENCRYPTION := true
 #WITH_DEXPREOPT_BOOT_IMG_ONLY ?= true
 WITH_DEXPREOPT := false
 
+# Extended Filesystem Support
+TARGET_EXFAT_DRIVER := sdfat
+
 # Display
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
