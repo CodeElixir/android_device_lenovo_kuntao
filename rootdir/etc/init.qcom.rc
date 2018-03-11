@@ -613,11 +613,10 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
 on property:sys.shutdown.requested=*
     stop cnss-daemon
 
-service loc_launcher /system/bin/loc_launcher
+service loc_launcher /vendor/bin/loc_launcher
     #loc_launcher will start as root and set its uid to gps
     class late_start
-    group gps inet net_raw diag net_admin wifi
-    writepid /dev/cpuset/system-background/tasks
+    group gps inet oem_2950 wifi
 
 on property:crypto.driver.load=1
      insmod /system/lib/modules/qce.ko
