@@ -1,7 +1,7 @@
 Lenovo P2
 ==============
 
-This branch is for building Android Oreo.
+This branch is for building Android Lineage 15.1.
 
 # About Device
 
@@ -22,6 +22,3 @@ Rear Camera | 13 MP, f/2.0, 21mm, phase detection autofocus, dual-LED (dual tone
 Front Camera | 5 MP, f/2.2, 1080p
 
 ---
-
-### Thanks to:
- * FireLord1
