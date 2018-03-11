@@ -231,8 +231,7 @@ TARGET_RIL_VARIANT := caf
 # Recovery
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/etc/fstab.full
 
-# Sensor
-# USE_SENSOR_MULTI_HAL := true
+PRODUCT_BOOT_JARS += telephony-ext
 
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
