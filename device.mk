@@ -403,6 +403,14 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/prima/WCNSS_qcom_cfg.ini \
     $(LOCAL_PATH)/prebuilt/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/WCNSS_qcom_cfg.ini
 
+PRODUCT_PACKAGES += \
+    vndk-sp
+
+#HIDL
+PRODUCT_PACKAGES += \
+    android.hidl.base@1.0 \
+    android.hidl.manager@1.0
+    
 #### PROPERTIES ####
 
 # default.prop
@@ -425,9 +433,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Common stuff
 $(call inherit-product, device/lenovo/kuntao/configs/common.mk)
-
-# HWUI memory limits
-$(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-3072-hwui-memory.mk)
 
 # Vendor
 $(call inherit-product, vendor/lenovo/kuntao/kuntao-vendor.mk)
