@@ -165,6 +165,11 @@ PRODUCT_PACKAGES += \
      android.hardware.memtrack@1.0-impl \
      android.hardware.memtrack@1.0-service 
 
+# Health HAL
+PRODUCT_PACKAGES += \
+    android.hardware.health@1.0-impl \
+    android.hardware.health@1.0-service 
+
 # Ebtables
 PRODUCT_PACKAGES += \
     ebtables \
