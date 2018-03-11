@@ -495,13 +495,11 @@ vendor/lib64/lib-rtpsl.so|bddbc043783d053f65ad269e37b870fef775dbed
 vendor/lib64/lib-uceservice.so|3d782c0bbcc3727541ffa63a887060cdf559d916
 vendor/lib64/vendor.qti.imsrtpservice@1.0-service-Impl.so|f6113715ce15dd8c1400d8017e0e033b75e0faf3
 vendor/lib64/vendor.qti.imsrtpservice@1.0_vendor.so|cda7a4da8436db7a71496fbc6b75136d99af0658
-# Time services
--app/TimeService/TimeService.apk
-bin/time_daemon
-vendor/lib64/libTimeService.so
--vendor/lib64/libtime_genoff.so
-vendor/lib/libTimeService.so
--vendor/lib/libtime_genoff.so
+
+# Time services - from tissot - OPR1.170623.026
+-vendor/app/TimeService/TimeService.apk|0d0b2d8b737b3083668d6cddd41b608825a5e5be
+vendor/bin/time_daemon|aecfad5b0eb3a1ad85cee394cbcb2e2006a8bce7
+vendor/lib64/libtime_genoff.so|0f5b21c5d9abd69249774a7d5c2c5195558e549d
 
 # Sensors
 bin/sensors.qcom
