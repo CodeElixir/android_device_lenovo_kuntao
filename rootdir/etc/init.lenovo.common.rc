@@ -1,9 +1,28 @@
-import init.lenovo.sensor.rc
-import init.mmi.usb.rc
+import /vendor/etc/init/hw/init.lenovo.sensor.rc
+import /vendor/etc/init/hw/init.mmi.usb.rc
+
 
 on early-init
     # Create modem FSG mount point
     mkdir /fsg 755 root root
+
+#lenovo-sw weiweij added for smart_charger fast charger switch dameon
+service smart_charger /vendor/bin/smart_charger
+    class  main
+    user root
+#lenovo-sw weiweij added for smart_charger fast charger switch dameon end
+
+service vfmservice /vendor/bin/vfmService
+    user system
+    group system
+    class main
+    disabled
+
+on property:sys.listeners.registered=true
+    start vfmservice
+
+on property:vold.decrypt=trigger_restart_framework
+    start vfmservice
 
 on fs
     # use /persist as phony PDS partition
@@ -11,7 +30,7 @@ on fs
 
     # Mount modem FSG partition
     wait /dev/block/bootdevice/by-name/fsg
-    mount ext4 /dev/block/bootdevice/by-name/fsg /fsg ro nosuid nodev barrier=0 context=u:object_r:fsg_file:s0
+    mount ext4 /dev/block/bootdevice/by-name/fsg /fsg ro nosuid nodev barrier=0 
 
 on post-fs
     mkdir /persist/camera 0755 mot_tcmd mot_tcmd
@@ -82,39 +101,16 @@ on boot
 # Change ownership for for seed feature
     chown system system /sys/class/graphics/fb0/color_profile
 
-#lenovo-sw wengjun1 add 20160504 begin
+# Double tap and glove mode
     chown system system /sys/board_properties/tpd_glove_status
     chown system system /sys/board_properties/tpd_suspend_status
-    chown system system /dev/rmi0
     chmod 0664 /sys/board_properties/tpd_suspend_status
     chmod 0664 /sys/board_properties/tpd_glove_status
-    chmod 0660 /dev/rmi0
-#lenovo-sw wengjun1 add 20160504 end
 
-    chmod 0755 /system/bin/vfmService
-    chmod 0660 /dev/vfsspi
+# Fingerprint
     chown system system /dev/vfsspi
+    chmod 0660 /dev/vfsspi
     mkdir /data/validity 0775 system system
     mkdir /dev/validity 0775 system system
-    chmod 0660 /sys/bus/platform/devices/soc:fingerprint@0/shutdown
     chown system system /sys/bus/platform/devices/soc:fingerprint@0/shutdown
-
-on property:sys.listeners.registered=true
-    start vfmservice
-
-service vfmservice /system/bin/vfmService
-    user system
-    group system
-    class main
-    disabled
-
-#Lenovo-sw huangzhen6 added 20160125 begin
-#service qseeopt /system/bin/qseecom_opt_handler
-#    class main
-#    user system
-#    disabled
-#    oneshot
-
-#on property:sys.boot_completed=1
-#    start qseeopt
-#Lenovo-sw huangzhen6 added 20160125 end
+    chmod 0660 /sys/bus/platform/devices/soc:fingerprint@0/shutdown
