@@ -267,12 +267,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/nfc/nfc_wallet.conf:system/etc/nfc_wallet.conf
 
 PRODUCT_PACKAGES += \
-    libnfc \
-    libnfc_jni \
-    nfc_nci.bcm2079x.default \
     NfcNci \
     Tag \
-    com.android.nfc_extras 
+    com.android.nfc_extras \
+    libnfc \
+    libnfc_jni \
 
 PRODUCT_PACKAGES += \
     android.hardware.nfc@1.0-impl-bcm \

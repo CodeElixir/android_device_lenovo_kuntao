@@ -13,7 +13,6 @@
         <package android:name="org.simalliance.openmobileapi.eseterminal"/>
         <package android:name="org.simalliance.openmobileapi.uicc1terminal"/>
         <package android:name="org.simalliance.openmobileapi.uicc2terminal"/>
-        <package android:name="com.lenovo.wallet"/>
         <package android:name="com.brcm.nfcutil" />
     </signer>
 
@@ -27,7 +26,6 @@
         <package android:name="org.simalliance.openmobileapi.eseterminal"/>
         <package android:name="org.simalliance.openmobileapi.uicc1terminal"/>
         <package android:name="org.simalliance.openmobileapi.uicc2terminal"/>
-        <package android:name="com.lenovo.wallet"/>
         <package android:name="com.brcm.nfcutil" />
     </signer>
 </resources>
