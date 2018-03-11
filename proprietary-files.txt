@@ -1,3 +1,4 @@
+
 # Proprietary files for kuntao
 
 # ACBD Data
@@ -539,11 +540,11 @@ vendor/lib/libWVStreamControlAPI_L3.so
 vendor/lib/libwvdrm_L3.so
 vendor/lib/mediadrm/libwvdrmengine.so
 
-# Peripheral manager
-bin/pm-service
-bin/pm-proxy
-vendor/lib/libperipheral_client.so
-vendor/lib64/libperipheral_client.so
+# Peripheral manager - from tissot - OPR1.170623.026
+vendor/bin/pm-proxy|e12c72d05c764a2c45b2a5d4d1886519cba3fb16
+vendor/bin/pm-service|83fac998bf8f651f2f0cd2385f6e1b7c3eefe5ea
+vendor/lib64/libperipheral_client.so|d6db5efd4667ae3e831403f4e313fa38a5ae7bc8
+vendor/lib/libperipheral_client.so|0dabab6dc68748c2b0d3a97a5708ee555b3d5650
 
 # Postprocessing
 -framework/com.qti.snapdragon.sdk.display.jar
@@ -800,9 +801,8 @@ etc/firmware/a540_gpmu.fw2
 # USB
 etc/firmware/ice40.bin
 
-# WiFi
-bin/cnss-daemon
-bin/cnss_diag
+# WiFi - from tissot - OPR1.170623.026
+vendor/bin/cnss-daemon|2336903c6a526568b8c74fff4b429d5fabe71d1d
 bin/wcnss_service
 
 # WiFi Firmware
@@ -921,10 +921,16 @@ vendor/lib64/libwqe.so|1ee0763c75da97daf3ef50a34be34cdb6465683f
 vendor/lib64/libxml.so|28642c2ee9abf46130f5b44b3665b63b008d150d
 
 
-# Bluetooth
-bin/btnvtool
-bin/hci_qcomm_init
-bin/wcnss_filter
+# Bluetooth - from tissot - OPR1.170623.026
+vendor/bin/wcnss_filter|f13b7dd2bc091e73e2c13a9f96affd98340ee9df
+vendor/lib64/libbtnv.so|19c1fde09804422dd0988888254383c4b907122e
+vendor/lib/libbtnv.so|89b57498c5e5e554f9e36c77b958e8bc8f8ca17c
+
+# Bluetooth (aptX) - from marlin - OPM1.171019.011
+lib64/libaptX_encoder.so|0cebad28afcf29f931bdc2d24fce2730dc882ecf
+lib64/libaptXHD_encoder.so|90f47f10af28b3ead143200cb4370b847c513127
+lib/libaptX_encoder.so|984739a0bc968e18f75ced205733fe3f51c2d4f0
+lib/libaptXHD_encoder.so|974c486e4ca03faa0713553d9dfe2995ac93e01c
 
 # Bluetooth firmware
 etc/firmware/nvm_tlv_1.3.bin
