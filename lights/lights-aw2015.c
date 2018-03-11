@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Lenovo P2 light module by GSandeep96 (https://github.com/GSandeep96)
+ * Lenovo P2 light module by CodeElixir (https://github.com/CodeElixir)
  * 2017/10/30: Initial commit
  * 2017/11/1: Handle multiple color and multiple blink
  * 2017/11/1: Fix permission and ownership of blink(from daniel_hk)
@@ -341,7 +341,6 @@ set_speaker_light_locked(struct light_device_t* dev,
 
     switch (state->flashMode) {
         case LIGHT_FLASH_TIMED:
-        case LIGHT_FLASH_HARDWARE:
             onMS = state->flashOnMS;
             offMS = state->flashOffMS;
             break;
@@ -402,7 +401,6 @@ set_speaker_light_locked(struct light_device_t* dev,
 static void
 handle_speaker_battery_locked(struct light_device_t* dev)
 {
-    set_speaker_light_locked(dev, NULL);
     if (is_lit(&g_attention)) {
         set_speaker_light_locked(dev, &g_attention);
     } else if (is_lit(&g_notification)) {
@@ -428,7 +426,33 @@ set_light_notifications(struct light_device_t* dev,
         struct light_state_t const* state)
 {
     pthread_mutex_lock(&g_lock);
+    unsigned int brightness;
+    unsigned int color;
+    unsigned int rgb[3];
+
     g_notification = *state;
+
+    // If a brightness has been applied by the user
+    brightness = (g_notification.color & 0xFF000000) >> 24;
+    if (brightness > 0 && brightness < 0xFF) {
+
+        // Retrieve each of the RGB colors
+        color = g_notification.color & 0x00FFFFFF;
+        rgb[0] = (color >> 16) & 0xFF;
+        rgb[1] = (color >> 8) & 0xFF;
+        rgb[2] = color & 0xFF;
+
+        // Apply the brightness level
+        if (rgb[0] > 0)
+            rgb[0] = (rgb[0] * brightness) / 0xFF;
+        if (rgb[1] > 0)
+            rgb[1] = (rgb[1] * brightness) / 0xFF;
+        if (rgb[2] > 0)
+            rgb[2] = (rgb[2] * brightness) / 0xFF;
+
+        // Update with the new color
+        g_notification.color = (rgb[0] << 16) + (rgb[1] << 8) + rgb[2];
+    }
     handle_speaker_battery_locked(dev);
     pthread_mutex_unlock(&g_lock);
     return 0;
@@ -439,20 +463,10 @@ set_light_attention(struct light_device_t* dev,
         struct light_state_t const* state)
 {
     pthread_mutex_lock(&g_lock);
-
-    g_attention = *state;
-    if (state->flashMode == LIGHT_FLASH_HARDWARE) {
-        if (g_attention.flashOnMS > 0 && g_attention.flashOffMS == 0) {
-            g_attention.flashMode = LIGHT_FLASH_NONE;
-        }
-    } else if (state->flashMode == LIGHT_FLASH_NONE) {
-        g_attention.color = 0;
-    }
+	g_attention = *state;
     handle_speaker_battery_locked(dev);
-
     pthread_mutex_unlock(&g_lock);
-
-    return 0;
+	return 0;
 }
 
 /** Close the lights device */
@@ -522,6 +536,6 @@ struct hw_module_t HAL_MODULE_INFO_SYM = {
     .version_minor = 0,
     .id = LIGHTS_HARDWARE_MODULE_ID,
     .name = "Lenovo P2 Lights Module",
-    .author = "GSandeep",
+    .author = "CodeElixir",
     .methods = &lights_module_methods,
 };
