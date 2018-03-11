@@ -229,7 +229,7 @@ TARGET_USE_SDCLANG := true
 TARGET_RIL_VARIANT := caf
 
 # Recovery
-TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/fstab.qcom
+TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/etc/fstab.full
 
 # Sensor
 # USE_SENSOR_MULTI_HAL := true
