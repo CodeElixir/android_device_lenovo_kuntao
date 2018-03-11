@@ -85,14 +85,6 @@ PRODUCT_PACKAGES += \
     com.dsi.ant.antradio_library \
     libantradio
 
-# DRM
-PRODUCT_PACKAGES += \
-    libprotobuf-cpp-lite
-
-# RIL
-PRODUCT_PACKAGES += \
-    libprotobuf-cpp-full 
-
 PRODUCT_PACKAGES += \
     android.system.net.netd@1.0 \
     libandroid_net \
@@ -337,7 +329,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     librmnetctl \
     libcnefeatureconfig \
-    libxml2
+    libxml2 \
+    libprotobuf-cpp-full
 
 # Sensors
 PRODUCT_COPY_FILES += \
