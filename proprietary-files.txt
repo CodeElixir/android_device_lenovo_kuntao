@@ -524,11 +524,11 @@ vendor/lib64/sensors.st.so
 vendor/lib64/libmag_akm.so
 vendor/lib64/lib_acgdaemon.so
 
-# Thermal
-vendor/bin/thermal-engine
-vendor/lib/libthermalclient.so
-vendor/lib64/libthermalclient.so
-vendor/lib64/libthermalioctl.so
+# Thermal - from tissot - OPR1.170623.026
+vendor/bin/thermal-engine|ef05fa3e09dafb74775a69e6a10c5d00194e3d53
+-vendor/lib64/libthermalclient.so|9beae9671d80ee9b1d47689ed32b5780a863cb77
+vendor/lib64/libthermalioctl.so|ca2dca5f433073df781073f449fd7ed73a4e4d3c
+-vendor/lib/libthermalclient.so|6096637d37150d89caf3c730c9964ac07797fa55
 
 # TAS
 lib/libTAS2555ftc.so
