@@ -138,6 +138,7 @@ mm.enable.qcom_parser=4177903
 
 # Perf
 ro.vendor.extension_library=libqti-perfd-client.so
+ro.vendor.qti.sys.fw.bg_apps_limit=60
 
 # Enable Delay Service Restart
 #ro.am.reschedule_service=true
