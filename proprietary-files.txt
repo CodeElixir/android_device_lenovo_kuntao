@@ -579,7 +579,7 @@ etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv_lenovo.bin
 etc/firmware/wlan/prima/WCNSS_wlan_dictionary_lenovo.dat
 
 # IMS - from tissot - OPR1.170623.026
--app/ims/ims.apk|42881dc3adfd5e4f716bdb4d510ca45a0b415b74
+-app/ims/ims.apk|fc50677a4f6ac3c15015fec967e8dff607e66e03
 etc/permissions/qti-vzw-ims-internal.xml:vendor/etc/permissions/qti-vzw-ims-internal.xml|3e41b645dd4ad8bad6775c103a34bfd7a507a4f7
 lib/com.qualcomm.qti.imscmservice@1.0.so|1dec77e0803ea99d85c87874c81c54688d4bd59d
 lib/lib-imscamera.so|b5229cfab8d44b9184de250196d108e813a0df85
@@ -626,6 +626,7 @@ vendor/lib64/lib-rtpsl.so|bddbc043783d053f65ad269e37b870fef775dbed
 vendor/lib64/lib-uceservice.so|3d782c0bbcc3727541ffa63a887060cdf559d916
 vendor/lib64/vendor.qti.imsrtpservice@1.0-service-Impl.so|f6113715ce15dd8c1400d8017e0e033b75e0faf3
 vendor/lib64/vendor.qti.imsrtpservice@1.0_vendor.so|cda7a4da8436db7a71496fbc6b75136d99af0658
+
 
 # Bluetooth - from tissot - OPR1.170623.026
 vendor/bin/wcnss_filter|f13b7dd2bc091e73e2c13a9f96affd98340ee9df
