@@ -27,18 +27,7 @@ etc/acdbdata/QRD/QRD_Speaker_cal.acdb
 # Camera
 bin/mm-qcamera-daemon
 etc/camera/lenovo_kuntao_camera.xml
-lib/hw/camera.msm8953.so
-lib/libmmjpeg_interface.so
-lib/libmm-qcamera.so
-lib/libmmcamera_interface.so
 lib/libarcsoft_beautyshot.so
-lib/libmpbase.so
-lib/libivc_smartengine.so
-lib/libqomx_core.so
-lib/libarcsoft_hdr.so
-lib/libarcsoft_beautyshot.so
-lib/libarcsoft_night_shot.so
-lib/libarcsoft_panorama_burstcapture.so
 vendor/lib/lib-imscamera.so
 vendor/lib/lib-imsvt.so
 vendor/lib/libavenhancements.so
