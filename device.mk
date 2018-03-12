@@ -431,8 +431,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
     $(LOCAL_PATH)/seccomp/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
     $(LOCAL_PATH)/seccomp/mediaextractor.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy
 
-# Common stuff
-$(call inherit-product, device/lenovo/kuntao/configs/common.mk)
-
 # Vendor
 $(call inherit-product, vendor/lenovo/kuntao/kuntao-vendor.mk)
