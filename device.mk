@@ -302,10 +302,6 @@ PRODUCT_PACKAGES += \
     libextmedia_jni \
     libhypv_intercept 
 
-# Power
-PRODUCT_PACKAGES += \
-    power.msm8953
-
 # Power HAL
 PRODUCT_PACKAGES += \
      android.hardware.power@1.1-service-qti
