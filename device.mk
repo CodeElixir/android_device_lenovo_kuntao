@@ -94,7 +94,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     audiod \
     audio.a2dp.default \
-    audio.primary.msm8953 \
     audio.r_submix.default \
     audio.usb.default \
     libaudio-resampler \
@@ -342,8 +341,7 @@ PRODUCT_PACKAGES += \
     ueventd.qcom.rc
 
 PRODUCT_PACKAGES += \
-	init.qcom.early_boot.sh \
-	init.qcom.sensors.sh \
+	init.class_main.sh \
 	init.qcom.sh
 
 # RIL
