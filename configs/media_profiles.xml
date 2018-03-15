@@ -267,11 +267,12 @@
              channels="1" />
     </EncoderProfile>
 
-    <EncoderProfile quality="timelapsevga" fileFormat="mp4" duration="30">
+
+    <EncoderProfile quality="timelapseqvga" fileFormat="mp4" duration="30">
       <Video codec="h264"
-             bitRate="2000000"
-             width="640"
-             height="480"
+             bitRate="512000"
+             width="320"
+             height="240"
              frameRate="30" />
 
       <!-- audio setting is ignored -->
@@ -505,11 +506,11 @@
              channels="1" />
     </EncoderProfile>
 
-    <EncoderProfile quality="timelapsevga" fileFormat="mp4" duration="30">
+    <EncoderProfile quality="timelapseqvga" fileFormat="mp4" duration="30">
       <Video codec="h264"
-             bitRate="2000000"
-             width="640"
-             height="480"
+             bitRate="512000"
+             width="320"
+             height="240"
              frameRate="30" />
 
       <!-- audio setting is ignored -->
