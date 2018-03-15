@@ -92,15 +92,16 @@ PRODUCT_PACKAGES += \
 
 # Audio
 PRODUCT_PACKAGES += \
-    audiod \
     audio.a2dp.default \
     audio.r_submix.default \
     audio.usb.default \
     libaudio-resampler \
+    libaudioroute \
     libqcomvisualizer \
     libqcomvoiceprocessing \
     libqcompostprocbundle \
-    tinymix
+    libvolumelistener \
+    tinymix 
 
 PRODUCT_PACKAGES += \
      android.hardware.audio@2.0-impl \
@@ -148,7 +149,9 @@ PRODUCT_PACKAGES += \
     memtrack.msm8953 \
     liboverlay \
     libtinyxml \
-    libdisplayconfig 
+    libdisplayconfig \
+    libqdMetaData.system \
+    libjni_livedisplay 
 
 # Graphic HAL
 PRODUCT_PACKAGES += \
@@ -266,6 +269,8 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
 
+PRODUCT_PACKAGES += android.hardware.media.omx
+
 # NFC
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/nfc/libnfc-brcm.conf:system/vendor/etc/libnfc-brcm.conf \
@@ -353,8 +358,8 @@ PRODUCT_PACKAGES += \
 
 # Sensors
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/sensors/hals.conf:vendor/etc/sensors/hals.conf \
-    $(LOCAL_PATH)/configs/sensors/sensor_def_qcomdev.conf:system/etc/sensors/sensor_def_qcomdev.conf
+    $(LOCAL_PATH)/configs/sensors/hals.conf:system/vendor/etc/sensors/hals.conf \
+    $(LOCAL_PATH)/configs/sensors/sensor_def_qcomdev.conf:system/vendor/etc/sensors/sensor_def_qcomdev.conf
 
  PRODUCT_PACKAGES += \
      android.hardware.sensors@1.0-impl
