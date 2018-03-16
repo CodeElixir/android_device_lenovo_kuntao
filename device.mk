@@ -134,6 +134,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
 	camera.device@1.0-impl \
     android.hardware.camera.provider@2.4-impl \
+    android.hardware.camera.provider@2.4-service \
     camera.device@3.2-impl \
     camera.msm8953 \
     libmm-qcamera \
