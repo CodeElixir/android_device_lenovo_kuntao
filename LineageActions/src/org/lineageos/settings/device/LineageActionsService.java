@@ -29,7 +29,6 @@ import java.util.LinkedList;
 
 import org.lineageos.settings.device.actions.UpdatedStateNotifier;
 import org.lineageos.settings.device.actions.FlipToMute;
-import org.lineageos.settings.device.actions.LiftToSilence;
 import org.lineageos.settings.device.actions.ProximitySilencer;
 
 import org.lineageos.settings.device.doze.DozePulseAction;

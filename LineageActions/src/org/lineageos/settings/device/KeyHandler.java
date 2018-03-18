@@ -522,13 +522,7 @@ public class KeyHandler implements DeviceKeyHandler {
         boolean isScreenOn = mPowerManager.isScreenOn();
         switch (scanCode) {
             case FP_TAP_SCANCODE:
-                if (isDoubleTapEnabledOnFP()) {
-                    detectDoubleTapOnFP();
-                    return;
-                } else {
-                    resetDoubleTapOnFP();
                     action = str2int(FileUtils.readOneLine(getFPNodeBasedOnScreenState(FP_KEYS_NODE)));
-                }
                 break;
             case FP_HOLD_SCANCODE:
                 if (isInLockTaskMode()){
@@ -763,18 +757,6 @@ public class KeyHandler implements DeviceKeyHandler {
     private void processScreenOffScancode(int scanCode) {
         int action = 0;
         switch (scanCode) {
-            case GESTURE_SWIPE_RIGHT_SCANCODE:
-                action = str2int(FileUtils.readOneLine(GESTURE_SWIPE_RIGHT_NODE));
-                break;
-            case GESTURE_SWIPE_LEFT_SCANCODE:
-                action = str2int(FileUtils.readOneLine(GESTURE_SWIPE_LEFT_NODE));
-                break;
-            case GESTURE_SWIPE_DOWN_SCANCODE:
-                action = str2int(FileUtils.readOneLine(GESTURE_SWIPE_DOWN_NODE));
-                break;
-            case GESTURE_SWIPE_UP_SCANCODE:
-                action = str2int(FileUtils.readOneLine(GESTURE_SWIPE_UP_NODE));
-                break;
             case GESTURE_DOUBLE_TAP_SCANCODE:
                 action = str2int(FileUtils.readOneLine(GESTURE_DOUBLE_TAP_NODE));
                 if (action != 0) {
