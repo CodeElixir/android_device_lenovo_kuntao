@@ -91,7 +91,7 @@ public class LineageActionsSettings {
             } else if (GESTURE_IR_SILENCER_KEY.equals(key)) {
                 mIrSilencerEnabled = sharedPreferences.getBoolean(GESTURE_IR_SILENCER_KEY, false);
             } else if (Constants.FP_HOME_KEY.equals(key) || Constants.FP_HAPTIC_KEY.equals(key) || Constants.FP_HOME_KEY_OFF.equals(key) || Constants.FP_HAPTIC_SCREENOFF_KEY.equals(key) ||Constants.FP_PROXIMITY_CHECK_SCREENOFF_KEY.equals(key) || Constants.FP_KEYS.equals(key) || Constants.FP_KEY_HOLD.equals(key) 
-                || Constants.FP_KEYS_OFF.equals(key) || Constants.FP_KEY_HOLD_OFF.equals(key) {
+                || Constants.FP_KEYS_OFF.equals(key) || Constants.FP_KEY_HOLD_OFF.equals(key)) {
                 Constants.writePreference(mContext, key);
                 updated = false;
             } else {
