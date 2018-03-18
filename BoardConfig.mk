@@ -136,7 +136,7 @@ WITH_LINEAGE_CHARGER := false
 # CMHW
 BOARD_HARDWARE_CLASS += \
     device/lenovo/kuntao/lineagehw
-#TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/enable_dt2w"
+TARGET_TAP_TO_WAKE_NODE := "/sys/board_properties/tpd_suspend_status"
 
 # CNE / DPM
 BOARD_USES_QCNE := true
