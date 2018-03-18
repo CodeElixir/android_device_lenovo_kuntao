@@ -138,7 +138,7 @@ public class Constants {
     };
 
     // Screen off gestures nodes
-    public static final String GESTURE_DOUBLE_TAP_NODE = "/sys/android_touch/doubletap2wake";
+    public static final String GESTURE_DOUBLE_TAP_NODE = "/sys/board_properties/tpd_suspend_status";
     
     // Screen off gestures haptic
     public static final String KEY_GESTURE_ENABLE_HAPTIC_FEEDBACK = "screen_off_gesture_haptic_feedback";
