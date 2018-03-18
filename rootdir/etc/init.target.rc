@@ -42,6 +42,8 @@ on fs
     mkdir /persist/data 0700 system system
     mkdir /persist/bms 0700 root system
     restorecon_recursive /persist
+    #lenovo-sw jixj 2012.11.9 add
+    exec  /system/bin/sh /system/etc/init.lenovo.persist.sh
     
     # use /persist as phony PDS partition
     symlink /persist /pds

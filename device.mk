@@ -351,7 +351,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	init.class_main.sh \
 	init.qcom.sh \
-	init.qcom.post_boot.sh
+	init.qcom.post_boot.sh \
+	init.lenovo.persist.sh
 
 # RIL
 PRODUCT_PACKAGES += \
