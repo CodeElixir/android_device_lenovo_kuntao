@@ -19,30 +19,24 @@ package org.lineageos.hardware;
 
 import com.synaptics.fingerprint.Fingerprint;
 
+import org.lineageos.internal.util.FileUtils;
+
 /*
  * Disable fingerprint gestures
  */
 public class KeyDisabler {
     private static Fingerprint sFingerprint = new Fingerprint(null);
+    private static String CONTROL_PATH = "/sys/homebutton/enable";
 
-    /*
-     * Always return true in our case
-     */
     public static boolean isSupported() {
-        return true;
+        return FileUtils.isFileWritable(CONTROL_PATH);
     }
 
-    /*
-     * Are the fingerprint gestures currently disabled?
-     */
     public static boolean isActive() {
-        return Fingerprint.isNavEnabled();
+        return FileUtils.readOneLine(CONTROL_PATH).equals("0");
     }
 
-    /*
-     * Disable fingerprint gestures
-     */
     public static boolean setActive(boolean state) {
-        return Fingerprint.enableNav(!state) == 0;
+        return true;
     }
 }

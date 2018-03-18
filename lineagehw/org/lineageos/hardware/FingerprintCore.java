@@ -18,10 +18,13 @@ package com.synaptics.fingerprint;
 
 import android.content.Context;
 import android.util.Log;
+import org.lineageos.internal.util.FileUtils;
 
 public class FingerprintCore {
     protected static final String TAG = "Fingerprint";
     protected Context mContext = null;
+
+    private static String CONTROL_PATH = "/sys/homebutton/enable";
 
     private native int jniCancelOp();
 
@@ -53,10 +56,13 @@ public class FingerprintCore {
     }
 
     static {
+    if(FileUtils.isFileWritable(CONTROL_PATH)){
         try {
             System.loadLibrary("vcsfp");
         } catch (Throwable th) {
             Log.e(TAG, "Error loading library libvcsfp: " + th);
         }
+    }
+
     }
 }
