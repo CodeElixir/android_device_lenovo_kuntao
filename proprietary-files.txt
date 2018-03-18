@@ -63,6 +63,9 @@ etc/surround_sound_3mic/surround_sound_rec_AZ.cfg
 etc/drc/drc_cfg_5.1.txt
 etc/drc/drc_cfg_AZ.txt
 
+# Amplifier
+etc/firmware/tas2555_uCDSP.bin
+
 # Bluetooth firmware
 etc/firmware/nvm_tlv_1.3.bin
 etc/firmware/nvm_tlv_2.1.bin
