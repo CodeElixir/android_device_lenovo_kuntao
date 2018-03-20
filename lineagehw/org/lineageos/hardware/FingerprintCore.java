@@ -56,13 +56,11 @@ public class FingerprintCore {
     }
 
     static {
-    if(FileUtils.isFileWritable(CONTROL_PATH)){
         try {
             System.loadLibrary("vcsfp");
         } catch (Throwable th) {
             Log.e(TAG, "Error loading library libvcsfp: " + th);
         }
-    }
 
     }
 }
