@@ -27,7 +27,6 @@ import android.util.Log;
 
 import org.lineageos.settings.device.actions.Constants;
 import org.lineageos.settings.device.actions.UpdatedStateNotifier;
-import org.lineageos.settings.device.actions.CameraActivationAction;
 import org.lineageos.settings.device.actions.TorchAction;
 
 public class LineageActionsSettings {
@@ -84,14 +83,15 @@ public class LineageActionsSettings {
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             boolean updated = true;
 
-			 if (GESTURE_IR_WAKEUP_KEY.equals(key)) {
+		    if (GESTURE_IR_WAKEUP_KEY.equals(key)) {
                 mIrWakeUpEnabled = sharedPreferences.getBoolean(GESTURE_IR_WAKEUP_KEY, false);
             } else if (GESTURE_PICK_UP_KEY.equals(key)) {
                 mPickUpGestureEnabled = sharedPreferences.getBoolean(GESTURE_PICK_UP_KEY, false);
             } else if (GESTURE_IR_SILENCER_KEY.equals(key)) {
                 mIrSilencerEnabled = sharedPreferences.getBoolean(GESTURE_IR_SILENCER_KEY, false);
-            } else if (Constants.FP_HOME_KEY.equals(key) || Constants.FP_HAPTIC_KEY.equals(key) || Constants.FP_HOME_KEY_OFF.equals(key) || Constants.FP_HAPTIC_SCREENOFF_KEY.equals(key) ||Constants.FP_PROXIMITY_CHECK_SCREENOFF_KEY.equals(key) || Constants.FP_KEYS.equals(key) || Constants.FP_KEY_HOLD.equals(key) 
-                || Constants.FP_KEYS_OFF.equals(key) || Constants.FP_KEY_HOLD_OFF.equals(key)) {
+            } else if (Constants.FP_HOME_KEY.equals(key) || Constants.FP_HAPTIC_KEY.equals(key) || Constants.FP_HOME_KEY_OFF.equals(key) || Constants.FP_HAPTIC_SCREENOFF_KEY.equals(key) ||Constants.FP_PROXIMITY_CHECK_SCREENOFF_KEY.equals(key) || Constants.FP_KEYS.equals(key) || Constants.FP_KEY_DBLTAP.equals(key) || Constants.FP_KEY_HOLD.equals(key) 
+                || Constants.FP_KEYS_OFF.equals(key) || Constants.FP_KEY_DBLTAP_OFF.equals(key) || Constants.FP_KEY_HOLD_OFF.equals(key)
+                || Constants.GESTURE_SWIPE_RIGHT.equals(key) || Constants.GESTURE_SWIPE_LEFT.equals(key) || Constants.GESTURE_SWIPE_DOWN.equals(key) || Constants.GESTURE_SWIPE_UP.equals(key)) {
                 Constants.writePreference(mContext, key);
                 updated = false;
             } else {

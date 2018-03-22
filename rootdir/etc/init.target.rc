@@ -105,6 +105,12 @@ service thermal-engine /system/vendor/bin/thermal-engine
    socket thermal-send-rule stream 0660 system system
    group root
 
+service time_daemon /vendor/bin/time_daemon
+    class main
+    user root
+    group root
+    writepid /dev/cpuset/system-background/tasks
+
 on boot
     start rmt_storage
 # access permission for secure touch

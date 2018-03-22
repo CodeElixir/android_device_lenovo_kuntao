@@ -24,8 +24,6 @@ public class FingerprintCore {
     protected static final String TAG = "Fingerprint";
     protected Context mContext = null;
 
-    private static String CONTROL_PATH = "/sys/homebutton/enable";
-
     private native int jniCancelOp();
 
     private native int jniCleanupVcs();

@@ -12,5 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-key 616   FPS_ONENAV_TAP
-key 617   FPS_ONENAV_HOLD
+device.internal = 1
+
+keyboard.layout = Validity_Navigation_Sensor
+keyboard.builtIn = 1
+keyboard.orientationAware = 1

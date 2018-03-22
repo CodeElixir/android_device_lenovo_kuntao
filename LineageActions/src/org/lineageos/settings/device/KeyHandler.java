@@ -111,9 +111,13 @@ public class KeyHandler implements DeviceKeyHandler {
     private Runnable doubleTapRunnable = new Runnable() {
         public void run() {
             int action = 0;
+            if (fpTapCounts > 1) {
+                action = str2int(FileUtils.readOneLine(getFPNodeBasedOnScreenState(FP_KEY_DBLTAP_NODE)));
+            } else {
                 if (isSingleTapEnabledOnFP()) {
                     action = str2int(FileUtils.readOneLine(getFPNodeBasedOnScreenState(FP_KEYS_NODE)));
                 }
+            }
 
             if (action != 0) {
                 boolean isActionSupported = ArrayUtils.contains(mPowerManager.isScreenOn() ? sFPSupportedActions : sFPSupportedActionsScreenOff, action);
@@ -432,6 +436,10 @@ public class KeyHandler implements DeviceKeyHandler {
         return !FileUtils.readOneLine(getFPNodeBasedOnScreenState(FP_KEYS_NODE)).equals("0");
     }
 
+    private boolean isDoubleTapEnabledOnFP() {
+        return !FileUtils.readOneLine(getFPNodeBasedOnScreenState(FP_KEY_DBLTAP_NODE)).equals("0");
+    }
+
     private boolean isHapticFeedbackEnabledOnFP() {
         return !FileUtils.readOneLine(getFPNodeBasedOnScreenState(FP_HAPTIC_NODE)).equals("0");
     }
@@ -453,6 +461,8 @@ public class KeyHandler implements DeviceKeyHandler {
                 return FP_KEYS_SCREENOFF_NODE;
             case FP_HAPTIC_NODE:
                 return FP_HAPTIC_SCREENOFF_NODE;
+            case FP_KEY_DBLTAP_NODE:
+                return FP_KEY_SCREENOFF_DBLTAP_NODE;
             case FP_KEY_HOLD_NODE:
                 return FP_KEY_SCREENOFF_HOLD_NODE;
         }
@@ -522,7 +532,13 @@ public class KeyHandler implements DeviceKeyHandler {
         boolean isScreenOn = mPowerManager.isScreenOn();
         switch (scanCode) {
             case FP_TAP_SCANCODE:
+                if (isDoubleTapEnabledOnFP()) {
+                    detectDoubleTapOnFP();
+                    return;
+                } else {
+                    resetDoubleTapOnFP();
                     action = str2int(FileUtils.readOneLine(getFPNodeBasedOnScreenState(FP_KEYS_NODE)));
+                }
                 break;
             case FP_HOLD_SCANCODE:
                 if (isInLockTaskMode()){
@@ -757,6 +773,18 @@ public class KeyHandler implements DeviceKeyHandler {
     private void processScreenOffScancode(int scanCode) {
         int action = 0;
         switch (scanCode) {
+            case GESTURE_SWIPE_RIGHT_SCANCODE:
+                action = str2int(FileUtils.readOneLine(GESTURE_SWIPE_RIGHT_NODE));
+                break;
+            case GESTURE_SWIPE_LEFT_SCANCODE:
+                action = str2int(FileUtils.readOneLine(GESTURE_SWIPE_LEFT_NODE));
+                break;
+            case GESTURE_SWIPE_DOWN_SCANCODE:
+                action = str2int(FileUtils.readOneLine(GESTURE_SWIPE_DOWN_NODE));
+                break;
+            case GESTURE_SWIPE_UP_SCANCODE:
+                action = str2int(FileUtils.readOneLine(GESTURE_SWIPE_UP_NODE));
+                break;
             case GESTURE_DOUBLE_TAP_SCANCODE:
                 action = str2int(FileUtils.readOneLine(GESTURE_DOUBLE_TAP_NODE));
                 if (action != 0) {

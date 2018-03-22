@@ -236,7 +236,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/usr/keylayout/synaptics_dsx_i2c.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/synaptics_dsx_i2c.kl \
     $(LOCAL_PATH)/prebuilt/usr/keylayout/synaptics_dsxv26.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/synaptics_dsxv26.kl \
     $(LOCAL_PATH)/prebuilt/usr/keylayout/synaptics_rmi4_i2c.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/synaptics_rmi4_i2c.kl \
-    $(LOCAL_PATH)/prebuilt/usr/keylayout/Validity_Navigation_Sensor.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Validity_Navigation_Sensor.kl
+    $(LOCAL_PATH)/prebuilt/usr/keylayout/Validity_Navigation_Sensor.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Validity_Navigation_Sensor.kl \
+    $(LOCAL_PATH)/prebuilt/usr/keylayout/Validity_Navigation_Sensor.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/Validity_Navigation_Sensor.idc 
 
 
  # Keymaster HAL

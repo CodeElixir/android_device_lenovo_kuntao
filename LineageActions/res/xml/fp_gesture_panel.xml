@@ -41,6 +41,15 @@
             android:entryValues="@array/fp_keys_listValues" />
 
         <ListPreference
+            android:title="@string/fingerprint_double_tap_title"
+            android:summary="%s"
+            android:dialogTitle="@string/fingerprint_double_tap_dlg_title"
+            android:key="fp_key_dbltap"
+            android:defaultValue="0"
+            android:entries="@array/fp_keys_listArray"
+            android:entryValues="@array/fp_keys_listValues" />
+
+        <ListPreference
             android:title="@string/fingerprint_long_tap_title"
             android:summary="%s"
             android:dialogTitle="@string/fingerprint_long_tap_dlg_title"
@@ -75,6 +84,16 @@
             android:summary="%s"
             android:dialogTitle="@string/fingerprint_tap_dlg_title"
             android:key="fp_keys_off"
+            android:defaultValue="0"
+            android:entries="@array/fp_keys_screen_off_listArray"
+            android:entryValues="@array/fp_keys_screen_off_listValues" />
+
+        <ListPreference
+            android:dependency="fp_home_scr_off"
+            android:title="@string/fingerprint_double_tap_title"
+            android:summary="%s"
+            android:dialogTitle="@string/fingerprint_double_tap_dlg_title"
+            android:key="fp_key_dbltap_off"
             android:defaultValue="0"
             android:entries="@array/fp_keys_screen_off_listArray"
             android:entryValues="@array/fp_keys_screen_off_listValues" />

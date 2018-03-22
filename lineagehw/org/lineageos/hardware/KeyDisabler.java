@@ -33,10 +33,10 @@ public class KeyDisabler {
     }
 
     public static boolean isActive() {
-        return (FileUtils.readOneLine(CONTROL_PATH).equals("0") || Fingerprint.isNavEnabled());
+        return FileUtils.readOneLine(CONTROL_PATH).equals("0");
     }
 
     public static boolean setActive(boolean state) {
-        return Fingerprint.enableNav(!state) == 0;
+        return true;
     }
 }

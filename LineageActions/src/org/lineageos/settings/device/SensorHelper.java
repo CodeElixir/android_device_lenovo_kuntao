@@ -32,6 +32,7 @@ import android.util.Log;
 public class SensorHelper {
     private static final String TAG = "LineageActions";
 
+
     private static final int BATCH_LATENCY_IN_MS = 100;
 
     private final Context mContext;
@@ -59,7 +60,7 @@ public class SensorHelper {
         }
     }
 
-   public Sensor getProximitySensor() {
+    public Sensor getProximitySensor() {
         return mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY, true);
     }
 

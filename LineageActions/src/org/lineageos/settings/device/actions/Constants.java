@@ -107,21 +107,33 @@ public class Constants {
 
     // List of keys
     public static final String FP_KEYS = "fp_keys";
+    public static final String FP_KEY_DBLTAP = "fp_key_dbltap";
     public static final String FP_KEY_HOLD = "fp_key_hold";
 
     public static final String FP_KEYS_OFF = "fp_keys_off";
+    public static final String FP_KEY_DBLTAP_OFF = "fp_key_dbltap_off";
     public static final String FP_KEY_HOLD_OFF = "fp_key_hold_off";
 
     // Keys nodes
     public static final String FP_KEYS_NODE = "/sys/homebutton/key";
+    public static final String FP_KEY_DBLTAP_NODE = "/sys/homebutton/key_dbltap";
     public static final String FP_KEY_HOLD_NODE = "/sys/homebutton/key_hold";
 
     public static final String FP_KEYS_SCREENOFF_NODE = "/sys/homebutton/key_screenoff";
+    public static final String FP_KEY_SCREENOFF_DBLTAP_NODE = "/sys/homebutton/key_screenoff_dbltap";
     public static final String FP_KEY_SCREENOFF_HOLD_NODE = "/sys/homebutton/key_screenoff_hold";
 
     // Screen off gestures
+    public static final int GESTURE_SWIPE_RIGHT_SCANCODE = 622;
+    public static final int GESTURE_SWIPE_LEFT_SCANCODE = 623;
+    public static final int GESTURE_SWIPE_DOWN_SCANCODE = 624;
+    public static final int GESTURE_SWIPE_UP_SCANCODE = 625;
     public static final int GESTURE_DOUBLE_TAP_SCANCODE = 626;
     public static final int[] sSupportedScreenOffGestures = new int[]{
+            GESTURE_SWIPE_RIGHT_SCANCODE,
+            GESTURE_SWIPE_LEFT_SCANCODE,
+            GESTURE_SWIPE_DOWN_SCANCODE,
+            GESTURE_SWIPE_UP_SCANCODE,
             GESTURE_DOUBLE_TAP_SCANCODE
     };
     public static final int[] sScreenOffSupportedActions = new int[]{
@@ -137,8 +149,18 @@ public class Constants {
             ACTION_MESSAGES
     };
 
+    // List of screen off gestures keys
+    public static final String GESTURE_SWIPE_RIGHT = "screen_off_gestures_swipe_right";
+    public static final String GESTURE_SWIPE_LEFT = "screen_off_gestures_swipe_left";
+    public static final String GESTURE_SWIPE_DOWN = "screen_off_gestures_swipe_down";
+    public static final String GESTURE_SWIPE_UP = "screen_off_gestures_swipe_up";
+
     // Screen off gestures nodes
-    public static final String GESTURE_DOUBLE_TAP_NODE = "/sys/board_properties/tpd_suspend_status";
+    public static final String GESTURE_SWIPE_RIGHT_NODE = "/sys/android_touch/gesture_swipe_right";
+    public static final String GESTURE_SWIPE_LEFT_NODE = "/sys/android_touch/gesture_swipe_left";
+    public static final String GESTURE_SWIPE_DOWN_NODE = "/sys/android_touch/gesture_swipe_down";
+    public static final String GESTURE_SWIPE_UP_NODE = "/sys/android_touch/gesture_swipe_up";
+    public static final String GESTURE_DOUBLE_TAP_NODE = "/sys/android_touch/doubletap2wake";
     
     // Screen off gestures haptic
     public static final String KEY_GESTURE_ENABLE_HAPTIC_FEEDBACK = "screen_off_gesture_haptic_feedback";
@@ -157,10 +179,16 @@ public class Constants {
         FP_HAPTIC_SCREENOFF_KEY,
         FP_PROXIMITY_CHECK_SCREENOFF_KEY,
         FP_KEYS,
+        FP_KEY_DBLTAP,
         FP_KEY_HOLD,
         FP_KEYS_OFF,
+        FP_KEY_DBLTAP_OFF,
         FP_KEY_HOLD_OFF,
         FP_HOME_KEY_OFF,
+        GESTURE_SWIPE_RIGHT,
+        GESTURE_SWIPE_LEFT,
+        GESTURE_SWIPE_DOWN,
+        GESTURE_SWIPE_UP
     };
 
     static {
@@ -170,18 +198,30 @@ public class Constants {
         sBooleanNodePreferenceMap.put(FP_HAPTIC_SCREENOFF_KEY, FP_HAPTIC_SCREENOFF_NODE);
         sBooleanNodePreferenceMap.put(FP_PROXIMITY_CHECK_SCREENOFF_KEY, FP_PROXIMITY_CHECK_SCREENOFF_NODE);
         sBooleanNodePreferenceMap.put(FP_KEYS, FP_KEYS_NODE);
+        sBooleanNodePreferenceMap.put(FP_KEY_DBLTAP, FP_KEY_DBLTAP_NODE);
         sBooleanNodePreferenceMap.put(FP_KEY_HOLD, FP_KEY_HOLD_NODE);
         sBooleanNodePreferenceMap.put(FP_KEYS_OFF, FP_KEYS_SCREENOFF_NODE);
+        sBooleanNodePreferenceMap.put(FP_KEY_DBLTAP_OFF, FP_KEY_SCREENOFF_DBLTAP_NODE);
         sBooleanNodePreferenceMap.put(FP_KEY_HOLD_OFF, FP_KEY_SCREENOFF_HOLD_NODE);
+        sBooleanNodePreferenceMap.put(GESTURE_SWIPE_RIGHT, GESTURE_SWIPE_RIGHT_NODE);
+        sBooleanNodePreferenceMap.put(GESTURE_SWIPE_LEFT, GESTURE_SWIPE_LEFT_NODE);
+        sBooleanNodePreferenceMap.put(GESTURE_SWIPE_DOWN, GESTURE_SWIPE_DOWN_NODE);
+        sBooleanNodePreferenceMap.put(GESTURE_SWIPE_UP, GESTURE_SWIPE_UP_NODE);
         sNodeDefaultMap.put(FP_HOME_KEY, false);
         sNodeDefaultMap.put(FP_HOME_KEY_OFF, false);
         sNodeDefaultMap.put(FP_HAPTIC_KEY, false);
         sNodeDefaultMap.put(FP_HAPTIC_SCREENOFF_KEY, false);
         sNodeDefaultMap.put(FP_PROXIMITY_CHECK_SCREENOFF_KEY, true);
         sNodeDefaultMap.put(FP_KEYS, "0");
+        sNodeDefaultMap.put(FP_KEY_DBLTAP, "0");
         sNodeDefaultMap.put(FP_KEY_HOLD, "0");
         sNodeDefaultMap.put(FP_KEYS_OFF, "0");
+        sNodeDefaultMap.put(FP_KEY_DBLTAP_OFF, "0");
         sNodeDefaultMap.put(FP_KEY_HOLD_OFF, "0");
+        sNodeDefaultMap.put(GESTURE_SWIPE_RIGHT, "0");
+        sNodeDefaultMap.put(GESTURE_SWIPE_LEFT, "0");
+        sNodeDefaultMap.put(GESTURE_SWIPE_DOWN, "0");
+        sNodeDefaultMap.put(GESTURE_SWIPE_UP, "0");
     }
 
     public static boolean isPreferenceEnabled(Context context, String key) {
@@ -198,8 +238,8 @@ public class Constants {
 
         String value = "1";
 
-        if (!pref.equals(FP_KEYS) && !pref.equals(FP_KEY_HOLD) &&
-            !pref.equals(FP_KEYS_OFF) && !pref.equals(FP_KEY_HOLD_OFF))
+        if (!pref.equals(FP_KEYS) && !pref.equals(FP_KEY_DBLTAP) && !pref.equals(FP_KEY_HOLD) &&
+            !pref.equals(FP_KEYS_OFF) && !pref.equals(FP_KEY_DBLTAP_OFF) && !pref.equals(FP_KEY_HOLD_OFF) && !pref.equals(GESTURE_SWIPE_RIGHT) && !pref.equals(GESTURE_SWIPE_LEFT) && !pref.equals(GESTURE_SWIPE_DOWN) && !pref.equals(GESTURE_SWIPE_UP))
             value = isPreferenceEnabled(context, pref) ? "1" : "0";
         else
             value = GetPreference(context, pref);

@@ -104,13 +104,16 @@ on boot
 # Double tap and glove mode
     chown system system /sys/board_properties/tpd_glove_status
     chown system system /sys/board_properties/tpd_suspend_status
+    chown system system /dev/rmi0
     chmod 0664 /sys/board_properties/tpd_suspend_status
     chmod 0664 /sys/board_properties/tpd_glove_status
+    chmod 0660 /dev/rmi0
 
 # Fingerprint
-    chown system system /dev/vfsspi
+    chmod 0755 /vendor/bin/vfmService
     chmod 0660 /dev/vfsspi
+    chown system system /dev/vfsspi
     mkdir /data/validity 0775 system system
     mkdir /dev/validity 0775 system system
-    chown system system /sys/bus/platform/devices/soc:fingerprint@0/shutdown
     chmod 0660 /sys/bus/platform/devices/soc:fingerprint@0/shutdown
+    chown system system /sys/bus/platform/devices/soc:fingerprint@0/shutdown
