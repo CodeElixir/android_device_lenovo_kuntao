@@ -76,7 +76,6 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final String TAG = KeyHandler.class.getSimpleName();
 
     private static final int GESTURE_REQUEST = 1;
-    private static final int FP_ACTION_REQUEST = 2;
 
     private static final String ACTION_DISMISS_KEYGUARD =
             "com.android.keyguard.action.DISMISS_KEYGUARD_SECURELY";
@@ -93,7 +92,6 @@ public class KeyHandler implements DeviceKeyHandler {
     WakeLock mGestureWakeLock;
     private KeyguardManager mKeyguardManager;
     private ScreenOffGesturesHandler mScreenOffGesturesHandler;
-    private FPScreenOffGesturesHandler mFPScreenOffGesturesHandler;
     private SensorManager mSensorManager;
     private CameraManager mCameraManager;
     private String mRearCameraId;
@@ -104,38 +102,10 @@ public class KeyHandler implements DeviceKeyHandler {
     private boolean mProximityWakeSupported;
     private ISearchManager mSearchManagerService;
     private Handler mHandler;
-    private int fpTapCounts = 0;
-    private boolean fpTapPending = false;
     private boolean screenOffGesturePending = false;
-    private boolean fpGesturePending = false;
-    private Runnable doubleTapRunnable = new Runnable() {
-        public void run() {
-            int action = 0;
-            if (fpTapCounts > 1) {
-                action = str2int(FileUtils.readOneLine(getFPNodeBasedOnScreenState(FP_KEY_DBLTAP_NODE)));
-            } else {
-                if (isSingleTapEnabledOnFP()) {
-                    action = str2int(FileUtils.readOneLine(getFPNodeBasedOnScreenState(FP_KEYS_NODE)));
-                }
-            }
-
-            if (action != 0) {
-                boolean isActionSupported = ArrayUtils.contains(mPowerManager.isScreenOn() ? sFPSupportedActions : sFPSupportedActionsScreenOff, action);
-                if (isActionSupported) {
-                    fireFPAction(action, true);
-                }
-            }
-            resetDoubleTapOnFP();
-        }
-    };
     private Runnable screenOffGestureRunnable = new Runnable() {
         public void run() {
             resetScreenOffGestureDelay();
-        }
-    };
-    private Runnable fpGestureRunnable = new Runnable() {
-        public void run() {
-            resetFPGestureDelay();
         }
     };
 
@@ -144,7 +114,6 @@ public class KeyHandler implements DeviceKeyHandler {
 
         mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         mScreenOffGesturesHandler = new ScreenOffGesturesHandler();
-        mFPScreenOffGesturesHandler = new FPScreenOffGesturesHandler();
 
         mGestureWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                 "GestureWakeLock");
@@ -415,80 +384,26 @@ public class KeyHandler implements DeviceKeyHandler {
         }
     }
 
-    private void resetDoubleTapOnFP() {
-        fpTapCounts = 0;
-        fpTapPending = false;
-        mHandler.removeCallbacks(doubleTapRunnable);
-    }
-
-    private void detectDoubleTapOnFP() {
-        fpTapCounts++;
-        if (fpTapCounts == 1 || fpTapCounts == 2) {
-            doHapticFeedbackFP(false);
-        }
-        if (!fpTapPending) {
-            fpTapPending = true;
-            mHandler.postDelayed(doubleTapRunnable, ViewConfiguration.getDoubleTapTimeout());
-        }
-    }
-
-    private boolean isSingleTapEnabledOnFP() {
-        return !FileUtils.readOneLine(getFPNodeBasedOnScreenState(FP_KEYS_NODE)).equals("0");
-    }
-
-    private boolean isDoubleTapEnabledOnFP() {
-        return !FileUtils.readOneLine(getFPNodeBasedOnScreenState(FP_KEY_DBLTAP_NODE)).equals("0");
-    }
-
-    private boolean isHapticFeedbackEnabledOnFP() {
-        return !FileUtils.readOneLine(getFPNodeBasedOnScreenState(FP_HAPTIC_NODE)).equals("0");
-    }
-
-    private boolean isProximityEnabledOnScreenOffGesturesFP() {
-        return !FileUtils.readOneLine(getFPNodeBasedOnScreenState(FP_PROXIMITY_CHECK_SCREENOFF_NODE)).equals("0");
-    }
-
     private boolean isProximityEnabledOnScreenOffGestures() {
         return Settings.System.getInt(mContext.getContentResolver(), KEY_GESTURE_ENABLE_PROXIMITY_SENSOR, 1) != 0;
-    }
-
-    private String getFPNodeBasedOnScreenState(String node) {
-        if (mPowerManager.isScreenOn()) {
-            return node;
-        }
-        switch (node) {
-            case FP_KEYS_NODE:
-                return FP_KEYS_SCREENOFF_NODE;
-            case FP_HAPTIC_NODE:
-                return FP_HAPTIC_SCREENOFF_NODE;
-            case FP_KEY_DBLTAP_NODE:
-                return FP_KEY_SCREENOFF_DBLTAP_NODE;
-            case FP_KEY_HOLD_NODE:
-                return FP_KEY_SCREENOFF_HOLD_NODE;
-        }
-        return node;
     }
 
     public KeyEvent handleKeyEvent(KeyEvent event) {
         int scanCode = event.getScanCode();
 
-        if (DEBUG) {
+        //if (DEBUG) {
             Log.d(TAG, "DEBUG: action=" + event.getAction()
                     + ", flags=" + event.getFlags()
                     + ", keyCode=" + event.getKeyCode()
                     + ", scanCode=" + event.getScanCode()
                     + ", metaState=" + event.getMetaState()
                     + ", repeatCount=" + event.getRepeatCount());
-        }
+     //   }
 
-        boolean isFPScanCode = ArrayUtils.contains(sSupportedFPGestures, scanCode);
         boolean isScreenOffGesturesScanCode = ArrayUtils.contains(sSupportedScreenOffGestures, scanCode);
-        if (!isFPScanCode && !isScreenOffGesturesScanCode) {
+        if (!isScreenOffGesturesScanCode) {
             return event;
         }
-
-        boolean isFPGestureEnabled = FileUtils.readOneLine(FP_HOME_NODE).equals("1");
-        boolean isFPGestureEnabledOnScreenOff = FileUtils.readOneLine(FP_HOME_OFF_NODE).equals("1");
 
         boolean isScreenOn = mPowerManager.isScreenOn();
 
@@ -497,132 +412,10 @@ public class KeyHandler implements DeviceKeyHandler {
             return null;
         }
 
-        if (isFPScanCode){
-            if (fpGesturePending) {
-                return event;
-            } else {
-                resetFPGestureDelay();
-                fpGesturePending = true;
-                mHandler.postDelayed(fpGestureRunnable, 10);
-            }
-        }
-
-        if (scanCode != FP_TAP_SCANCODE) {
-            resetDoubleTapOnFP();
-        }
-
-        if (isFPScanCode) {
-            if ((!isFPGestureEnabled) || (!isScreenOn && !isFPGestureEnabledOnScreenOff)) {
-                resetDoubleTapOnFP();
-                return event;
-            }
-            if (!isScreenOn && isFPGestureEnabledOnScreenOff) {
-                processFPScreenOffScancode(scanCode);
-            } else {
-                processFPScancode(scanCode);
-            }
-        } else if (isScreenOffGesturesScanCode) {
+		if (isScreenOffGesturesScanCode) {
             handleScreenOffScancode(scanCode);
         }
         return null;
-    }
-
-    private void processFPScancode(int scanCode) {
-        int action = 0;
-        boolean isScreenOn = mPowerManager.isScreenOn();
-        switch (scanCode) {
-            case FP_TAP_SCANCODE:
-                if (isDoubleTapEnabledOnFP()) {
-                    detectDoubleTapOnFP();
-                    return;
-                } else {
-                    resetDoubleTapOnFP();
-                    action = str2int(FileUtils.readOneLine(getFPNodeBasedOnScreenState(FP_KEYS_NODE)));
-                }
-                break;
-            case FP_HOLD_SCANCODE:
-                if (isInLockTaskMode()){
-                    doHapticFeedbackFP(false);
-                    exitScreenPinningMode();
-                }else{
-                    action = str2int(FileUtils.readOneLine(getFPNodeBasedOnScreenState(FP_KEY_HOLD_NODE)));
-                }
-                break;
-        }
-        boolean isActionSupported = ArrayUtils.contains(isScreenOn ? sFPSupportedActions : sFPSupportedActionsScreenOff, action);
-        if (isActionSupported) {
-            fireFPAction(action, false);
-        }
-    }
-
-    private void fireFPAction(int action, boolean isDoubleTap) {
-        ensureKeyguardManager();
-        boolean isHapticFeedbackEnabledOnFP = isHapticFeedbackEnabledOnFP();
-        if (isDoubleTap && action != ACTION_CAMERA && action != ACTION_FLASHLIGHT) {
-            isHapticFeedbackEnabledOnFP = false;
-        }
-        if (isHapticFeedbackEnabledOnFP){
-            if (!isInLockTaskMode() && (action == ACTION_CAMERA || action == ACTION_FLASHLIGHT)) {
-                vibrate(action == ACTION_CAMERA ? 500 : 250);
-            }else if (isInLockTaskMode() || action != ACTION_VOICE_ASSISTANT) {
-                doHapticFeedbackFP(false);
-            }
-        }
-        if (isInLockTaskMode() && (action == ACTION_HOME || action == ACTION_RECENTS || action == ACTION_VOICE_ASSISTANT || action == ACTION_CAMERA || action == ACTION_LAST_APP)) {
-            return;
-        }
-        switch (action) {
-            case ACTION_HOME:
-                if (!mKeyguardManager.inKeyguardRestrictedInputMode()) {
-                    triggerVirtualKeypress(mHandler, KeyEvent.KEYCODE_HOME);
-                }
-                break;
-            case ACTION_POWER:
-                toggleScreenState();
-                break;
-            case ACTION_BACK:
-                triggerVirtualKeypress(mHandler, KeyEvent.KEYCODE_BACK);
-                break;
-            case ACTION_RECENTS:
-                if (!mKeyguardManager.inKeyguardRestrictedInputMode()) {
-                    triggerVirtualKeypress(mHandler, KeyEvent.KEYCODE_APP_SWITCH);
-                }
-                break;
-            case ACTION_VOLUME_UP:
-                triggerVirtualKeypress(mHandler, KeyEvent.KEYCODE_VOLUME_UP);
-                break;
-            case ACTION_VOLUME_DOWN:
-                triggerVirtualKeypress(mHandler, KeyEvent.KEYCODE_VOLUME_DOWN);
-                break;
-            case ACTION_VOICE_ASSISTANT:
-                if (!mKeyguardManager.inKeyguardRestrictedInputMode()) {
-                    fireGoogleNowOnTap();
-                }
-                return;
-            case ACTION_PLAY_PAUSE:
-                dispatchMediaKeyWithWakeLock(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, mContext);
-                break;
-            case ACTION_PREVIOUS_TRACK:
-                dispatchMediaKeyWithWakeLock(KeyEvent.KEYCODE_MEDIA_PREVIOUS, mContext);
-                break;
-            case ACTION_NEXT_TRACK:
-                dispatchMediaKeyWithWakeLock(KeyEvent.KEYCODE_MEDIA_NEXT, mContext);
-                break;
-            case ACTION_FLASHLIGHT:
-                toggleFlashlight();
-                break;
-            case ACTION_CAMERA:
-                triggerCameraAction();
-                break;
-            case ACTION_SCREENSHOT:
-                triggerVirtualKeypress(mHandler, KeyEvent.KEYCODE_SYSRQ);
-                break;
-            case ACTION_LAST_APP:
-                if (!mKeyguardManager.inKeyguardRestrictedInputMode()) {
-                    switchToLastApp(mContext);
-                }
-                break;
-        }
     }
 
     private void vibrate(int intensity) {
@@ -688,60 +481,9 @@ public class KeyHandler implements DeviceKeyHandler {
         }
     }
 
-    private void processFPScreenOffScancode(int scanCode) {
-        if (isProximityEnabledOnScreenOffGesturesFP() && !mFPScreenOffGesturesHandler.hasMessages(FP_ACTION_REQUEST)) {
-            Message msg = mFPScreenOffGesturesHandler.obtainMessage(FP_ACTION_REQUEST);
-            msg.arg1 = scanCode;
-            boolean defaultProximity = mContext.getResources().getBoolean(
-                    org.lineageos.platform.internal.R.bool.config_proximityCheckOnWakeEnabledByDefault);
-            boolean proximityWakeCheckEnabled = LineageSettings.System.getInt(mContext.getContentResolver(),
-                    LineageSettings.System.PROXIMITY_ON_WAKE, defaultProximity ? 1 : 0) == 1;
-            if (mProximityWakeSupported && proximityWakeCheckEnabled && mProximitySensor != null) {
-                mFPScreenOffGesturesHandler.sendMessageDelayed(msg, mProximityTimeOut);
-                registerFPScreenOffListener(scanCode);
-            } else {
-                mFPScreenOffGesturesHandler.sendMessage(msg);
-            }
-        }else{
-            processFPScancode(scanCode);
-        }
-    }
-
-    private void registerFPScreenOffListener(final int scanCode) {
-        mProximityWakeLock.acquire();
-        mSensorManager.registerListener(new SensorEventListener() {
-            @Override
-            public void onSensorChanged(SensorEvent event) {
-                mProximityWakeLock.release();
-                mSensorManager.unregisterListener(this);
-                if (!mFPScreenOffGesturesHandler.hasMessages(FP_ACTION_REQUEST)) {
-                    // The sensor took to long, ignoring.
-                    return;
-                }
-                mFPScreenOffGesturesHandler.removeMessages(FP_ACTION_REQUEST);
-                if (event.values[0] == mProximitySensor.getMaximumRange()) {
-                    Message msg = mFPScreenOffGesturesHandler.obtainMessage(FP_ACTION_REQUEST);
-                    msg.arg1 = scanCode;
-                    mFPScreenOffGesturesHandler.sendMessage(msg);
-                }
-            }
-
-            @Override
-            public void onAccuracyChanged(Sensor sensor, int accuracy) {
-            }
-
-        }, mProximitySensor, SensorManager.SENSOR_DELAY_FASTEST);
-    }
-
-
     private void resetScreenOffGestureDelay() {
         screenOffGesturePending = false;
         mHandler.removeCallbacks(screenOffGestureRunnable);
-    }
-
-    private void resetFPGestureDelay() {
-        fpGesturePending = false;
-        mHandler.removeCallbacks(fpGestureRunnable);
     }
 
     private void handleScreenOffScancode(int scanCode) {
@@ -892,37 +634,11 @@ public class KeyHandler implements DeviceKeyHandler {
         }
     }
 
-    private void doHapticFeedbackFP(boolean longpress) {
-        if (mVibrator == null) {
-            return;
-        }
-
-        if (isHapticFeedbackEnabledOnFP()) {
-            mHandler.post(new Runnable() {
-                public void run() {
-                    int owningUid;
-                    String owningPackage;
-                    owningUid = android.os.Process.myUid();
-                    owningPackage = mContext.getOpPackageName();
-                    VibrationEffect effect = VibrationEffect.createOneShot(longpress ? 50 : 40, VibrationEffect.DEFAULT_AMPLITUDE);
-                    mVibrator.vibrate(owningUid, owningPackage, effect, VIBRATION_ATTRIBUTES);
-                }
-            });
-        }
-    }
-
     private class ScreenOffGesturesHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
             int scanCode = msg.arg1;
             processScreenOffScancode(scanCode);
-        }
-    }
-
-    private class FPScreenOffGesturesHandler extends Handler {
-        @Override
-        public void handleMessage(Message msg) {
-            processFPScancode(msg.arg1);
         }
     }
 

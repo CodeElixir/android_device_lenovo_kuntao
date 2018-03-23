@@ -33,14 +33,6 @@ public class Constants {
 
     private static final String TAG = "LineageActions";
 
-    // FP gestures
-    public static final int FP_TAP_SCANCODE = 616;
-    public static final int FP_HOLD_SCANCODE = 617;
-    public static final int[] sSupportedFPGestures = new int[]{
-            FP_TAP_SCANCODE,
-            FP_HOLD_SCANCODE,
-    };
-
     // FP actions
     public static final int ACTION_HOME = 100;
     public static final int ACTION_POWER = 101;
@@ -86,42 +78,6 @@ public class Constants {
             ACTION_FLASHLIGHT,
             ACTION_CAMERA
     };
-
-    // Swap keys
-    public static final String FP_HOME_KEY = "fp_home";
-    public static final String FP_HOME_KEY_OFF = "fp_home_scr_off";
-
-    // Swap nodes
-    public static final String FP_HOME_NODE = "/sys/homebutton/enable";
-    public static final String FP_HOME_OFF_NODE = "/sys/homebutton/enable_off";
-
-    // Haptic node
-    public static final String FP_HAPTIC_NODE = "/sys/homebutton/haptic";
-    public static final String FP_HAPTIC_KEY = "fp_haptic";
-    public static final String FP_HAPTIC_SCREENOFF_NODE = "/sys/homebutton/haptic_off";
-    public static final String FP_HAPTIC_SCREENOFF_KEY = "fp_haptic_scr_off";
-
-    // Proximity check node
-    public static final String FP_PROXIMITY_CHECK_SCREENOFF_NODE = "/sys/homebutton/proximity_check_off";
-    public static final String FP_PROXIMITY_CHECK_SCREENOFF_KEY = "fp_proximity_check_scr_off";
-
-    // List of keys
-    public static final String FP_KEYS = "fp_keys";
-    public static final String FP_KEY_DBLTAP = "fp_key_dbltap";
-    public static final String FP_KEY_HOLD = "fp_key_hold";
-
-    public static final String FP_KEYS_OFF = "fp_keys_off";
-    public static final String FP_KEY_DBLTAP_OFF = "fp_key_dbltap_off";
-    public static final String FP_KEY_HOLD_OFF = "fp_key_hold_off";
-
-    // Keys nodes
-    public static final String FP_KEYS_NODE = "/sys/homebutton/key";
-    public static final String FP_KEY_DBLTAP_NODE = "/sys/homebutton/key_dbltap";
-    public static final String FP_KEY_HOLD_NODE = "/sys/homebutton/key_hold";
-
-    public static final String FP_KEYS_SCREENOFF_NODE = "/sys/homebutton/key_screenoff";
-    public static final String FP_KEY_SCREENOFF_DBLTAP_NODE = "/sys/homebutton/key_screenoff_dbltap";
-    public static final String FP_KEY_SCREENOFF_HOLD_NODE = "/sys/homebutton/key_screenoff_hold";
 
     // Screen off gestures
     public static final int GESTURE_SWIPE_RIGHT_SCANCODE = 622;
@@ -173,18 +129,6 @@ public class Constants {
     public static final Map<String, Object> sNodeDefaultMap = new HashMap<>();
 
     public static final String[] sPrefKeys = {
-        FP_HOME_KEY,
-        FP_HOME_KEY_OFF,
-        FP_HAPTIC_KEY,
-        FP_HAPTIC_SCREENOFF_KEY,
-        FP_PROXIMITY_CHECK_SCREENOFF_KEY,
-        FP_KEYS,
-        FP_KEY_DBLTAP,
-        FP_KEY_HOLD,
-        FP_KEYS_OFF,
-        FP_KEY_DBLTAP_OFF,
-        FP_KEY_HOLD_OFF,
-        FP_HOME_KEY_OFF,
         GESTURE_SWIPE_RIGHT,
         GESTURE_SWIPE_LEFT,
         GESTURE_SWIPE_DOWN,
@@ -192,32 +136,10 @@ public class Constants {
     };
 
     static {
-        sBooleanNodePreferenceMap.put(FP_HOME_KEY, FP_HOME_NODE);
-        sBooleanNodePreferenceMap.put(FP_HOME_KEY_OFF, FP_HOME_OFF_NODE);
-        sBooleanNodePreferenceMap.put(FP_HAPTIC_KEY, FP_HAPTIC_NODE);
-        sBooleanNodePreferenceMap.put(FP_HAPTIC_SCREENOFF_KEY, FP_HAPTIC_SCREENOFF_NODE);
-        sBooleanNodePreferenceMap.put(FP_PROXIMITY_CHECK_SCREENOFF_KEY, FP_PROXIMITY_CHECK_SCREENOFF_NODE);
-        sBooleanNodePreferenceMap.put(FP_KEYS, FP_KEYS_NODE);
-        sBooleanNodePreferenceMap.put(FP_KEY_DBLTAP, FP_KEY_DBLTAP_NODE);
-        sBooleanNodePreferenceMap.put(FP_KEY_HOLD, FP_KEY_HOLD_NODE);
-        sBooleanNodePreferenceMap.put(FP_KEYS_OFF, FP_KEYS_SCREENOFF_NODE);
-        sBooleanNodePreferenceMap.put(FP_KEY_DBLTAP_OFF, FP_KEY_SCREENOFF_DBLTAP_NODE);
-        sBooleanNodePreferenceMap.put(FP_KEY_HOLD_OFF, FP_KEY_SCREENOFF_HOLD_NODE);
         sBooleanNodePreferenceMap.put(GESTURE_SWIPE_RIGHT, GESTURE_SWIPE_RIGHT_NODE);
         sBooleanNodePreferenceMap.put(GESTURE_SWIPE_LEFT, GESTURE_SWIPE_LEFT_NODE);
         sBooleanNodePreferenceMap.put(GESTURE_SWIPE_DOWN, GESTURE_SWIPE_DOWN_NODE);
         sBooleanNodePreferenceMap.put(GESTURE_SWIPE_UP, GESTURE_SWIPE_UP_NODE);
-        sNodeDefaultMap.put(FP_HOME_KEY, false);
-        sNodeDefaultMap.put(FP_HOME_KEY_OFF, false);
-        sNodeDefaultMap.put(FP_HAPTIC_KEY, false);
-        sNodeDefaultMap.put(FP_HAPTIC_SCREENOFF_KEY, false);
-        sNodeDefaultMap.put(FP_PROXIMITY_CHECK_SCREENOFF_KEY, true);
-        sNodeDefaultMap.put(FP_KEYS, "0");
-        sNodeDefaultMap.put(FP_KEY_DBLTAP, "0");
-        sNodeDefaultMap.put(FP_KEY_HOLD, "0");
-        sNodeDefaultMap.put(FP_KEYS_OFF, "0");
-        sNodeDefaultMap.put(FP_KEY_DBLTAP_OFF, "0");
-        sNodeDefaultMap.put(FP_KEY_HOLD_OFF, "0");
         sNodeDefaultMap.put(GESTURE_SWIPE_RIGHT, "0");
         sNodeDefaultMap.put(GESTURE_SWIPE_LEFT, "0");
         sNodeDefaultMap.put(GESTURE_SWIPE_DOWN, "0");
@@ -238,8 +160,7 @@ public class Constants {
 
         String value = "1";
 
-        if (!pref.equals(FP_KEYS) && !pref.equals(FP_KEY_DBLTAP) && !pref.equals(FP_KEY_HOLD) &&
-            !pref.equals(FP_KEYS_OFF) && !pref.equals(FP_KEY_DBLTAP_OFF) && !pref.equals(FP_KEY_HOLD_OFF) && !pref.equals(GESTURE_SWIPE_RIGHT) && !pref.equals(GESTURE_SWIPE_LEFT) && !pref.equals(GESTURE_SWIPE_DOWN) && !pref.equals(GESTURE_SWIPE_UP))
+        if (!pref.equals(GESTURE_SWIPE_RIGHT) && !pref.equals(GESTURE_SWIPE_LEFT) && !pref.equals(GESTURE_SWIPE_DOWN) && !pref.equals(GESTURE_SWIPE_UP))
             value = isPreferenceEnabled(context, pref) ? "1" : "0";
         else
             value = GetPreference(context, pref);

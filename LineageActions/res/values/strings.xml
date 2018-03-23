@@ -26,27 +26,6 @@
     <!-- Ambient display gestures -->
     <string name="ambient_display_manage_summary">Manage ambient display gestures</string>
 
-    <!-- Fingerprint gestures -->
-    <string name="fingerprint_gestures_title">Fingerprint gestures</string>
-    <string name="fingerprint_gestures_summary">Use fingerprint gestures</string>
-    <string name="fingerprint_gestures_manage_summary">Manage fingerprint gestures</string>
-    <string name="fingerprint_actions_screenon">Actions with screen on</string>
-    <string name="fingerprint_tap_title">Single tap</string>
-    <string name="fingerprint_tap_dlg_title">Select action for single tap</string>
-    <string name="fingerprint_double_tap_title">Double tap</string>
-    <string name="fingerprint_double_tap_dlg_title">Select action for double tap</string>
-    <string name="fingerprint_long_tap_title">Long tap</string>
-    <string name="fingerprint_long_tap_dlg_title">Select action for long tap</string>
-    <string name="fingerprint_swipe_left_title">Swipe left</string>
-    <string name="fingerprint_swipe_left_dlg_title">Select action for swipe left</string>
-    <string name="fingerprint_swipe_right_title">Swipe right</string>
-    <string name="fingerprint_swipe_right_dlg_title">Select action for swipe right</string>
-
-    <!-- Fingerprint gestures screen off -->
-    <string name="fingerprint_gestures_screenoff_title">Fingerprint gestures when screen off</string>
-    <string name="fingerprint_gestures_screenoff_summary">Use fingerprint gestures when screen off.\n\nFingerprint unlocking must be disabled to use this feature.</string>
-    <string name="fingerprint_actions_screenoff">Actions with screen off</string>
-
     <!-- Actions -->
     <string name="action_none">None</string>
     <string name="action_home">Home</string>

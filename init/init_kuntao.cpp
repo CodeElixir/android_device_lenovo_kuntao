@@ -49,6 +49,40 @@ char const *heapminfree;
 char const *heapmaxfree;
 char const *large_cache_height;
 
+static void init_alarm_boot_properties()
+{
+    char const *boot_reason_file = "/proc/sys/kernel/boot_reason";
+    char const *power_off_alarm_file = "/persist/alarm/powerOffAlarmSet";
+    std::string boot_reason;
+    std::string power_off_alarm;
+    std::string reboot_reason = GetProperty("ro.boot.alarmboot", "");
+
+    if (ReadFileToString(boot_reason_file, &boot_reason)
+            && ReadFileToString(power_off_alarm_file, &power_off_alarm)) {
+        /*
+         * Setup ro.alarm_boot value to true when it is RTC triggered boot up
+         * For existing PMIC chips, the following mapping applies
+         * for the value of boot_reason:
+         *
+         * 0 -> unknown
+         * 1 -> hard reset
+         * 2 -> sudden momentary power loss (SMPL)
+         * 3 -> real time clock (RTC)
+         * 4 -> DC charger inserted
+         * 5 -> USB charger inserted
+         * 6 -> PON1 pin toggled (for secondary PMICs)
+         * 7 -> CBLPWR_N pin toggled (for external power supply)
+         * 8 -> KPDPWR_N pin toggled (power key pressed)
+         */
+         if ((Trim(boot_reason) == "3" || reboot_reason == "true")
+                 && Trim(power_off_alarm) == "1") {
+             property_set("ro.alarm_boot", "true");
+         } else {
+             property_set("ro.alarm_boot", "false");
+         }
+    }
+}
+
 void check_device()
 {
     struct sysinfo sys;
@@ -58,18 +92,18 @@ void check_device()
     if (sys.totalram > 3072ull * 1024 * 1024) {
         // from - phone-xxhdpi-4096-dalvik-heap.mk
         heapstartsize = "16m";
-        heapgrowthlimit = "192m";
-        heapsize = "384m";
+        heapgrowthlimit = "256m";
+        heapsize = "512m";
         heapminfree = "4m";
         heapmaxfree = "8m";
 		large_cache_height = "2048";
 
     } else {
         // from - phone-xxhdpi-3072-dalvik-heap.mk
-        heapstartsize = "16m";
-        heapgrowthlimit = "192m";
-        heapsize = "384m";
-        heapminfree = "4m";
+        heapstartsize = "8m";
+        heapgrowthlimit = "288m";
+        heapsize = "768m";
+        heapminfree = "512k";
 		heapmaxfree = "8m";
         large_cache_height = "1024";
    }
@@ -97,4 +131,6 @@ void vendor_load_properties()
     property_set("ro.hwui.text_small_cache_height", "1024");
     property_set("ro.hwui.text_large_cache_width", "2048");
     property_set("ro.hwui.text_large_cache_height", large_cache_height);
+
+    init_alarm_boot_properties();
 }

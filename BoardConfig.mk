@@ -119,7 +119,6 @@ DEVICE_MATRIX_FILE   := $(LOCAL_PATH)/compatibility_matrix.xml
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
-BLUETOOTH_HCI_USE_MCT := true
 QCOM_BT_READ_ADDR_FROM_PROP := true
 
 # Camera
@@ -136,7 +135,6 @@ WITH_LINEAGE_CHARGER := false
 # CMHW
 BOARD_HARDWARE_CLASS += \
     device/lenovo/kuntao/lineagehw
-TARGET_TAP_TO_WAKE_NODE := "/sys/board_properties/tpd_suspend_status"
 
 # CNE / DPM
 BOARD_USES_QCNE := true
@@ -217,6 +215,8 @@ TARGET_PER_MGR_ENABLED := true
 
 # Power
 TARGET_POWERHAL_VARIANT := qcom
+TARGET_TAP_TO_WAKE_NODE := "/sys/board_properties/tpd_suspend_status"
+TARGET_HAS_NO_WIFI_STATS := true
 
 # Properties
 TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
