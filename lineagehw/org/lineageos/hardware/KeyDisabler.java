@@ -21,6 +21,9 @@ import com.synaptics.fingerprint.Fingerprint;
 
 import org.lineageos.internal.util.FileUtils;
 
+import android.util.Log;
+
+
 /*
  * Disable fingerprint gestures
  */
