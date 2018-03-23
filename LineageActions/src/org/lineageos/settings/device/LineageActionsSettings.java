@@ -89,7 +89,7 @@ public class LineageActionsSettings {
                 mPickUpGestureEnabled = sharedPreferences.getBoolean(GESTURE_PICK_UP_KEY, false);
             } else if (GESTURE_IR_SILENCER_KEY.equals(key)) {
                 mIrSilencerEnabled = sharedPreferences.getBoolean(GESTURE_IR_SILENCER_KEY, false);
-            } else if Constants.GESTURE_SWIPE_RIGHT.equals(key) || Constants.GESTURE_SWIPE_LEFT.equals(key) || Constants.GESTURE_SWIPE_DOWN.equals(key) || Constants.GESTURE_SWIPE_UP.equals(key)) {
+            } else if (Constants.GESTURE_SWIPE_RIGHT.equals(key) || Constants.GESTURE_SWIPE_LEFT.equals(key) || Constants.GESTURE_SWIPE_DOWN.equals(key) || Constants.GESTURE_SWIPE_UP.equals(key)) {
                 Constants.writePreference(mContext, key);
                 updated = false;
             } else {

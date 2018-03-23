@@ -459,17 +459,6 @@ public class KeyHandler implements DeviceKeyHandler {
         }, 20);
     }
 
-    private void fireGoogleNowOnTap() {
-        doHapticFeedbackFP(true);
-        mSearchManagerService = ISearchManager.Stub.asInterface(ServiceManager.getService(Context.SEARCH_SERVICE));
-        if (mSearchManagerService != null) {
-            try {
-                mSearchManagerService.launchAssist(new Bundle());
-            } catch (RemoteException e) {
-            }
-        }
-    }
-
     private int str2int(String str) {
         if (str == null || str.isEmpty()) {
             return 0;
