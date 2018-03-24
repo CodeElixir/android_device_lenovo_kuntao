@@ -29,14 +29,13 @@ import android.util.Log;
  */
 public class KeyDisabler {
     private static Fingerprint sFingerprint = new Fingerprint(null);
-    private static String CONTROL_PATH = "/sys/homebutton/enable";
 
     public static boolean isSupported() {
-        return FileUtils.isFileWritable(CONTROL_PATH);
+        return true;
     }
 
     public static boolean isActive() {
-        return (FileUtils.readOneLine(CONTROL_PATH).equals("0") && Fingerprint.isNavEnabled());
+        return Fingerprint.isNavEnabled();
     }
 
     public static boolean setActive(boolean state) {

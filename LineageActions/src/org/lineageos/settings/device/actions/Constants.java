@@ -116,7 +116,7 @@ public class Constants {
     public static final String GESTURE_SWIPE_LEFT_NODE = "/sys/android_touch/gesture_swipe_left";
     public static final String GESTURE_SWIPE_DOWN_NODE = "/sys/android_touch/gesture_swipe_down";
     public static final String GESTURE_SWIPE_UP_NODE = "/sys/android_touch/gesture_swipe_up";
-    public static final String GESTURE_DOUBLE_TAP_NODE = "/sys/android_touch/doubletap2wake";
+    public static final String GESTURE_DOUBLE_TAP_NODE = "/sys/board_properties/tpd_suspend_status";
     
     // Screen off gestures haptic
     public static final String KEY_GESTURE_ENABLE_HAPTIC_FEEDBACK = "screen_off_gesture_haptic_feedback";

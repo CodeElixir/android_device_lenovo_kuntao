@@ -719,6 +719,12 @@ vendor/bin/wcnss_filter|f13b7dd2bc091e73e2c13a9f96affd98340ee9df
 vendor/lib64/libbtnv.so|19c1fde09804422dd0988888254383c4b907122e
 vendor/lib/libbtnv.so|89b57498c5e5e554f9e36c77b958e8bc8f8ca17c
 
+# Bluetooth (aptX) - from marlin - OPM1.171019.011
+lib64/libaptX_encoder.so|0cebad28afcf29f931bdc2d24fce2730dc882ecf
+lib64/libaptXHD_encoder.so|90f47f10af28b3ead143200cb4370b847c513127
+lib/libaptX_encoder.so|984739a0bc968e18f75ced205733fe3f51c2d4f0
+lib/libaptXHD_encoder.so|974c486e4ca03faa0713553d9dfe2995ac93e01c
+
 # CNE - from tissot - OPR1.170623.026
 etc/cne/andsfCne.xml|f81a69eac5dd16bbb195a0fcf1211a51cc014553
 etc/cne/SwimConfig.xml|68dedcca1c2ac18cf81fdee1854de16a3a60dd02

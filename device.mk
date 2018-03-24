@@ -151,7 +151,7 @@ PRODUCT_PACKAGES += \
     libdisplayconfig \
     libqdMetaData.system \
     libjni_livedisplay 
-
+    
 # Graphic HAL
 PRODUCT_PACKAGES += \
      android.hardware.graphics.allocator@2.0-impl \
