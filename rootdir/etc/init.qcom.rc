@@ -539,7 +539,7 @@ on property:wc_transport.start_hci=false
 service start_hci_filter /system/bin/wcnss_filter
     class late_start
     user bluetooth
-    group bluetooth oem_2950
+    group bluetooth oem_2950 system wakelock
     disabled
 
 on property:wc_transport.start_root=true
@@ -547,6 +547,20 @@ on property:wc_transport.start_root=true
 
 on property:wc_transport.start_root=false
     stop hci_filter_root
+
+service hciattach /system/vendor/bin/hci_qcomm_init -e
+    class late_start
+    user bluetooth
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
+
+on property:bluetooth.hciattach=true
+    start hciattach
+    setprop bluetooth.status on
+
+on property:bluetooth.hciattach=false
+    setprop bluetooth.status off
 
 # FM
 on property:hw.fm.init=0
