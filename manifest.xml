@@ -217,15 +217,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl">
-        <name>vendor.lineage.livedisplay</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IColor</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
     <!-- NFC -->
      <hal format="hidl"> 
         <name>android.hardware.nfc</name>
@@ -355,15 +346,6 @@
         <version>2.0</version>
         <interface>
             <name>IMapper</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.graphics.composer</name>
-        <transport>hwbinder</transport>
-        <version>2.1</version>
-        <interface>
-            <name>IComposer</name>
             <instance>default</instance>
         </interface>
     </hal>
