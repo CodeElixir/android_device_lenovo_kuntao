@@ -1011,8 +1011,11 @@ vendor/lib64/vendor.qti.hardware.radio.uim_remote_client@1.0_vendor.so|d30462843
 vendor/lib64/vendor.qti.hardware.radio.uim_remote_server@1.0_vendor.so|e9bcbdf6544c5334a1f2e461d733d5766cd1b129
 vendor/radio/qcril_database/qcril.db|8405d20c8e1184c79eba1c4f19ecfb92d7529bdf
 
-# Time services - from bardock-pro - OPM1.171019.011
--vendor/app/TimeService/TimeService.apk|5055619766db32fe499cda86b892c9f3081219c5
-vendor/bin/time_daemon|8ea7d65a65c1d50afc6553ad52848b454c62563d
-vendor/lib64/libtime_genoff.so|7683a85cae9f17cd535e8960fceda1d6831074a0
+# Time services
+-app/TimeService/TimeService.apk|2b874af6b5ebf4d5ecfdc893a4731574bf02bb05
+bin/time_daemon:vendor/bin/time_daemon
+-vendor/lib/libtime_genoff.so
+vendor/lib/libTimeService.so
+-vendor/lib64/libtime_genoff.so
+vendor/lib64/libTimeService.so
 

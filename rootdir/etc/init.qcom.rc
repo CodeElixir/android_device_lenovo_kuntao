@@ -512,7 +512,7 @@ service cnd /vendor/bin/cnd
 service dpmQmiMgr /vendor/bin/dpmQmiMgr
     class main
     user system
-    group radio system
+    group system
 
 service irsc_util /vendor/bin/irsc_util "/vendor/etc/sec_config"
     class core
@@ -522,7 +522,6 @@ service irsc_util /vendor/bin/irsc_util "/vendor/etc/sec_config"
 service rmt_storage /vendor/bin/rmt_storage
     class core
     user root
-    group system wakelock
     shutdown critical
     ioprio rt 0
 
@@ -536,10 +535,11 @@ on property:wc_transport.start_hci=true
 on property:wc_transport.start_hci=false
     stop start_hci_filter
 
-service start_hci_filter /system/bin/wcnss_filter
+service start_hci_filter /system/vendor/bin/wcnss_filter
     class late_start
     user bluetooth
-    group bluetooth oem_2950 system wakelock
+    group bluetooth diag system wakelock
+    seclabel u:r:bluetooth:s0
     disabled
 
 on property:wc_transport.start_root=true
@@ -548,7 +548,7 @@ on property:wc_transport.start_root=true
 on property:wc_transport.start_root=false
     stop hci_filter_root
 
-service hciattach /system/vendor/bin/hci_qcomm_init -e
+service hciattach /system//vendor/bin/hci_qcomm_init -e
     class late_start
     user bluetooth
     group bluetooth net_bt_admin
@@ -581,11 +581,15 @@ service config_bt_addr /vendor/bin/btnvtool -O
     group bluetooth radio
     oneshot
 
-service netmgrd /vendor/bin/netmgrd
+service netmgrd /system/vendor/bin/netmgrd
     class main
-    user root
-    group root wifi wakelock radio inet
-   
+
+service ipacm-diag /system/vendor/bin/ipacm-diag
+    class main
+    user radio
+    socket ipacm_log_file dgram 660 radio radio
+    group radio diag
+
 service ipacm /vendor/bin/ipacm
     class main
     user radio
@@ -594,7 +598,7 @@ service ipacm /vendor/bin/ipacm
 service qti /vendor/bin/qti
     class main
     user radio
-    group radio oem_2950 usb
+    group radio net_raw oem_2950 usb net_admin
 
 service sensors /vendor/bin/sensors.qcom
     class core
