@@ -39,7 +39,8 @@ $(call inherit-product, frameworks/native/build/phone-xxhdpi-3072-hwui-memory.mk
 
 # LineageActions
 PRODUCT_PACKAGES += \
-    LineageActions
+    LineageActions \
+    LenovoDoze
     
 # Permissions
 #PRODUCT_COPY_FILES += \
