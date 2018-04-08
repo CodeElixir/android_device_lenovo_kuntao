@@ -66,6 +66,7 @@ ro.qualcomm.bluetooth.nap=true
 ro.bluetooth.sap=true
 ro.bluetooth.dun=true
 ro.qualcomm.bluetooth.map=true
+persist.bt.enableAptXHD=true
 
 # Camera
 camera.display.umax=1920x1080
@@ -94,12 +95,13 @@ debug.sf.hw=0
 debug.egl.hw=0
 persist.hwc.mdpcomp.enable=true
 debug.mdpcomp.logs=0
-dalvik.vm.heapsize=36m
 dev.pm.dyn_samplingrate=1
 persist.demo.hdmirotationlock=false
 debug.enable.sglscale=1
 debug.gralloc.enable_fb_ubwc=1
-
+sdm.debug.disable_rotator_split=1
+sdm.debug.disable_skip_validate=1
+sdm.perf_hint_window=50
 #
 # system prop for opengles version
 #

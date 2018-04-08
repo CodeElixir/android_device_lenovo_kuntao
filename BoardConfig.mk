@@ -1,4 +1,4 @@
-#
+93#
 # Copyright (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -159,6 +159,9 @@ WITH_DEXPREOPT := false
 TARGET_EXFAT_DRIVER := sdfat
 
 # Display
+BOARD_USES_ADRENO := true
+TARGET_CONTINUOUS_SPLASH_ENABLED := true
+TARGET_USES_C2D_COMPOSITION := true
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 TARGET_USES_GRALLOC1 := true
 TARGET_USES_ION := true
