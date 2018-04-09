@@ -24,7 +24,11 @@ DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay-lineage
 
 PRODUCT_ENFORCE_RRO_TARGETS := \
-    framework-res
+    Bluetooth \
+    Settings \
+    SettingsProvider \
+    SystemUI \
+    framework-res 
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
@@ -135,6 +139,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
 	camera.device@1.0-impl \
     android.hardware.camera.provider@2.4-impl \
+    android.hardware.camera.provider@2.4-service \
     camera.device@3.2-impl \
     camera.msm8953 \
     libmm-qcamera \
@@ -151,14 +156,18 @@ PRODUCT_PACKAGES += \
     liboverlay \
     libtinyxml \
     libdisplayconfig \
-    libqdMetaData.system \
-    libjni_livedisplay
+    libgenlock \
+    ibqdMetaData.system \
+    libjni_livedisplay \
+    vendor.display.config@1.0 \
+    vendor.display.config@1.0_vendor
     
 # Graphic HAL
 PRODUCT_PACKAGES += \
      android.hardware.graphics.allocator@2.0-impl \
      android.hardware.graphics.allocator@2.0-service \
      android.hardware.graphics.composer@2.1-impl \
+     android.hardware.graphics.composer@2.1-service \
      android.hardware.graphics.mapper@2.0-impl \
      android.hardware.configstore@1.0-service \
 
@@ -421,21 +430,6 @@ PRODUCT_PACKAGES += \
     android.hidl.base@1.0 \
     android.hidl.manager@1.0
     
-#### PROPERTIES ####
-
-# default.prop
-
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	ro.allow.mock.location=1 \
-	ro.debuggable=1 \
-	ro.adb.secure=0 \
-	persist.sys.usb.config=mtp,adb
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.service.adb.enable=1 \
-    persist.service.debuggable=1 \
-    persist.sys.root_access=0 
-
 # Seccomp policy
  PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/seccomp/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
