@@ -53,42 +53,26 @@ vendor/lib64/soundfx/libshoebox.so|f78894b08091c8b70f8cacee8242c3325d185e1f
 etc/firmware/tas2555_uCDSP.bin
 
 # Audio
-lib/hw/audio.primary.msm8953.so:vendor/lib/hw/audio.primary.msm8953.so
-lib/libtinycompress.so|c719f104aa0688129251429a5a1d079021a4be62
-lib64/hw/audio.primary.msm8953.so:vendor/lib64/hw/audio.primary.msm8953.so
-lib64/libtinycompress.so|020b96b4bc3ad4554e10cbc31d545565a690975f
 vendor/lib/hw/sound_trigger.primary.msm8953.so
-vendor/etc/audio_output_policy.conf
+vendor/lib64/hw/sound_trigger.primary.msm8953.so
 etc/speaker.ftcfg
-etc/mixer_paths_mtp.xml
-etc/mixer_paths.xml
-etc/mixer_paths_skuk.xml
-etc/a2dp_audio_policy_configuration.xml
-etc/audio_policy_volumes.xml
-etc/capability.xml
-etc/default_volume_tables.xml
-etc/r_submix_audio_policy_configuration.xml
-etc/usb_audio_policy_configuration.xml
-etc/aanc_tuning_mixer.txt
-etc/mixer_paths_qrd_sku3.xml
-etc/mixer_paths_qrd_skuh.xml
-etc/mixer_paths_qrd_skui.xml
-etc/mixer_paths_qrd_skum.xml
-etc/mixer_paths_qrd_skun.xml
-etc/mixer_paths_qrd_skuhf.xml
-etc/sound_trigger_mixer_paths.xml
-etc/audio_policy.conf
-etc/audio_policy_configuration.xml
-etc/audio_platform_info.xml
-etc/audio_platform_info_extcodec.xml
-etc/mixer_paths_wcd9306.xml
-etc/mixer_paths_wcd9326.xml
-etc/mixer_paths_wcd9330.xml
-etc/mixer_paths_wcd9335.xml
-etc/sound_trigger_mixer_paths_wcd9306.xml
-etc/sound_trigger_mixer_paths_wcd9330.xml
-etc/sound_trigger_mixer_paths_wcd9335.xml
-etc/sound_trigger_platform_info.xml
+etc/mixer_paths_skuk.xml:vendor/etc/mixer_paths_skuk.xml
+etc/mixer_paths_qrd_sku3.xml:vendor/etc/mixer_paths_qrd_sku3.xml
+etc/mixer_paths_qrd_skuh.xml:vendor/etc/mixer_paths_qrd_skuh.xml
+etc/mixer_paths_qrd_skui.xml:vendor/etc/mixer_paths_qrd_skui.xml
+etc/mixer_paths_qrd_skum.xml:vendor/etc/mixer_paths_qrd_skum.xml
+etc/mixer_paths_qrd_skun.xml:vendor/etc/mixer_paths_qrd_skun.xml
+etc/mixer_paths_qrd_skuhf.xml:vendor/etc/mixer_paths_qrd_skuhf.xml
+etc/audio_platform_info_extcodec.xml:vendor/etc/audio_platform_info_extcodec.xml
+etc/mixer_paths_wcd9306.xml:vendor/etc/mixer_paths_wcd9306.xml
+etc/mixer_paths_wcd9326.xml:vendor/etc/mixer_paths_wcd9326.xml
+etc/mixer_paths_wcd9330.xml:vendor/etc/mixer_paths_wcd9330.xml
+etc/mixer_paths_wcd9335.xml:vendor/etc/mixer_paths_wcd9335.xml
+etc/sound_trigger_mixer_paths_wcd9306.xml:vendor/etc/sound_trigger_mixer_paths_wcd9306.xml
+etc/sound_trigger_mixer_paths_wcd9330.xml:vendor/etc/sound_trigger_mixer_paths_wcd9330.xml
+etc/sound_trigger_mixer_paths_wcd9335.xml:vendor/etc/sound_trigger_mixer_paths_wcd9335.xml
+etc/sound_trigger_platform_info.xml:vendor/etc/sound_trigger_platform_info.xml
+
 
 # Camera
 bin/mm-qcamera-daemon:vendor/bin/mm-qcamera-daemon
@@ -578,6 +562,20 @@ vendor/lib/libwvdrm_L3.so
 vendor/lib/libWVStreamControlAPI_L3.so
 
 # Audio ACDB
+etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb
+etc/acdbdata/MTP/MTP_General_cal.acdb:vendor/etc/acdbdata/MTP/MTP_General_cal.acdb
+etc/acdbdata/MTP/MTP_Global_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Global_cal.acdb
+etc/acdbdata/MTP/MTP_Handset_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Handset_cal.acdb
+etc/acdbdata/MTP/MTP_Hdmi_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Hdmi_cal.acdb
+etc/acdbdata/MTP/MTP_Headset_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Headset_cal.acdb
+etc/acdbdata/MTP/MTP_Speaker_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Speaker_cal.acdb
+etc/acdbdata/MTP_NON_CE/MTP_Bluetooth_cal.acdb:vendor/etc/acdbdata/MTP_NON_CE/MTP_Bluetooth_cal.acdb
+etc/acdbdata/MTP_NON_CE/MTP_General_cal.acdb:vendor/etc/acdbdata/MTP_NON_CE/MTP_General_cal.acdb
+etc/acdbdata/MTP_NON_CE/MTP_Global_cal.acdb:vendor/etc/acdbdata/MTP_NON_CE/MTP_Global_cal.acdb
+etc/acdbdata/MTP_NON_CE/MTP_Handset_cal.acdb:vendor/etc/acdbdata/MTP_NON_CE/MTP_Handset_cal.acdb
+etc/acdbdata/MTP_NON_CE/MTP_Hdmi_cal.acdb:vendor/etc/acdbdata/MTP_NON_CE/MTP_Hdmi_cal.acdb
+etc/acdbdata/MTP_NON_CE/MTP_Headset_cal.acdb:vendor/etc/acdbdata/MTP_NON_CE/MTP_Headset_cal.acdb
+etc/acdbdata/MTP_NON_CE/MTP_Headset_cal.acdb:vendor/etc/acdbdata/MTP_NON_CE/MTP_Headset_cal.acdb
 etc/acdbdata/QRD/QRD_Bluetooth_cal.acdb:vendor/etc/acdbdata/QRD/QRD_Bluetooth_cal.acdb
 etc/acdbdata/QRD/QRD_General_cal.acdb:vendor/etc/acdbdata/QRD/QRD_General_cal.acdb
 etc/acdbdata/QRD/QRD_Global_cal.acdb:vendor/etc/acdbdata/QRD/QRD_Global_cal.acdb
@@ -585,6 +583,7 @@ etc/acdbdata/QRD/QRD_Handset_cal.acdb:vendor/etc/acdbdata/QRD/QRD_Handset_cal.ac
 etc/acdbdata/QRD/QRD_Hdmi_cal.acdb:vendor/etc/acdbdata/QRD/QRD_Hdmi_cal.acdb
 etc/acdbdata/QRD/QRD_Headset_cal.acdb:vendor/etc/acdbdata/QRD/QRD_Headset_cal.acdb
 etc/acdbdata/QRD/QRD_Speaker_cal.acdb:vendor/etc/acdbdata/QRD/QRD_Speaker_cal.acdb
+
 
 # Fastcharger
 bin/smart_charger:vendor/bin/smart_charger
