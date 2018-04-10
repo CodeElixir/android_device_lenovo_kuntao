@@ -240,7 +240,7 @@
     <!-- AUDIO -->
     <hal format="hidl">
         <name>android.hardware.audio</name>
-        <transport arch="32+64">passthrough</transport>
+        <transport>hwbinder</transport>
         <version>2.0</version>
         <interface>
             <name>IDevicesFactory</name>
@@ -249,7 +249,7 @@
     </hal>
     <hal format="hidl">
         <name>android.hardware.audio.effect</name>
-        <transport arch="32+64">passthrough</transport>
+        <transport>hwbinder</transport>
         <version>2.0</version>
         <interface>
             <name>IEffectsFactory</name>
@@ -258,13 +258,13 @@
     </hal>
      <hal format="hidl"> 
         <name>android.hardware.soundtrigger</name>
-        <transport arch="32+64">passthrough</transport>
+        <transport>hwbinder</transport>
         <version>2.0</version>
         <interface>
             <name>ISoundTriggerHw</name>
             <instance>default</instance>
         </interface>
-    </hal> -->
+    </hal> 
     <hal format="hidl"> 
         <name>android.hardware.broadcastradio</name>
         <transport arch="32+64">passthrough</transport>
