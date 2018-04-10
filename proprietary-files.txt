@@ -578,6 +578,20 @@ vendor/lib/libwvdrm_L3.so
 vendor/lib/libWVStreamControlAPI_L3.so
 
 # Audio ACDB
+etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb
+etc/acdbdata/MTP/MTP_General_cal.acdb:vendor/etc/acdbdata/MTP/MTP_General_cal.acdb
+etc/acdbdata/MTP/MTP_Global_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Global_cal.acdb
+etc/acdbdata/MTP/MTP_Handset_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Handset_cal.acdb
+etc/acdbdata/MTP/MTP_Hdmi_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Hdmi_cal.acdb
+etc/acdbdata/MTP/MTP_Headset_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Headset_cal.acdb
+etc/acdbdata/MTP/MTP_Speaker_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Speaker_cal.acdb
+etc/acdbdata/MTP_NON_CE/MTP_Bluetooth_cal.acdb:vendor/etc/acdbdata/MTP_NON_CE/MTP_Bluetooth_cal.acdb
+etc/acdbdata/MTP_NON_CE/MTP_General_cal.acdb:vendor/etc/acdbdata/MTP_NON_CE/MTP_General_cal.acdb
+etc/acdbdata/MTP_NON_CE/MTP_Global_cal.acdb:vendor/etc/acdbdata/MTP_NON_CE/MTP_Global_cal.acdb
+etc/acdbdata/MTP_NON_CE/MTP_Handset_cal.acdb:vendor/etc/acdbdata/MTP_NON_CE/MTP_Handset_cal.acdb
+etc/acdbdata/MTP_NON_CE/MTP_Hdmi_cal.acdb:vendor/etc/acdbdata/MTP_NON_CE/MTP_Hdmi_cal.acdb
+etc/acdbdata/MTP_NON_CE/MTP_Headset_cal.acdb:vendor/etc/acdbdata/MTP_NON_CE/MTP_Headset_cal.acdb
+etc/acdbdata/MTP_NON_CE/MTP_Headset_cal.acdb:vendor/etc/acdbdata/MTP_NON_CE/MTP_Headset_cal.acdb
 etc/acdbdata/QRD/QRD_Bluetooth_cal.acdb:vendor/etc/acdbdata/QRD/QRD_Bluetooth_cal.acdb
 etc/acdbdata/QRD/QRD_General_cal.acdb:vendor/etc/acdbdata/QRD/QRD_General_cal.acdb
 etc/acdbdata/QRD/QRD_Global_cal.acdb:vendor/etc/acdbdata/QRD/QRD_Global_cal.acdb
