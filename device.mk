@@ -30,13 +30,12 @@ PRODUCT_ENFORCE_RRO_TARGETS := \
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
-# Boot animation
-TARGET_SCREEN_HEIGHT := 1920
-TARGET_SCREEN_WIDTH := 1080
+# HWUI overrides
+$(call inherit-product, frameworks/native/build/phone-xxhdpi-3072-hwui-memory.mk)
 
-# LineageActions
+# LenovoDoze
 PRODUCT_PACKAGES += \
-    LineageActions
+    LenovoDoze
     
 # Permissions
 #PRODUCT_COPY_FILES += \
@@ -132,7 +131,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
 	camera.device@1.0-impl \
     android.hardware.camera.provider@2.4-impl \
-    android.hardware.camera.provider@2.4-service \
     camera.device@3.2-impl \
     camera.msm8953 \
     libmm-qcamera \
@@ -150,14 +148,15 @@ PRODUCT_PACKAGES += \
     libtinyxml \
     libdisplayconfig \
     libqdMetaData.system \
-    libjni_livedisplay 
+    libjni_livedisplay \
+    vendor.display.config@1.0 \
+    vendor.display.config@1.0_vendor
     
 # Graphic HAL
 PRODUCT_PACKAGES += \
      android.hardware.graphics.allocator@2.0-impl \
      android.hardware.graphics.allocator@2.0-service \
      android.hardware.graphics.composer@2.1-impl \
-     android.hardware.graphics.composer@2.1-service \
      android.hardware.graphics.mapper@2.0-impl \
      android.hardware.configstore@1.0-service \
 
@@ -267,7 +266,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
     $(LOCAL_PATH)/configs/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
-    $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml
+ 	$(LOCAL_PATH)/configs/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml
 
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
@@ -391,28 +390,23 @@ PRODUCT_PACKAGES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
-	android.hardware.wifi@1.0-service \
-	libcld80211 \
-	libwifi-hal-qcom \
+    android.hardware.wifi@1.0-service \
+    libcld80211 \
     libqsap_sdk \
     libQWiFiSoftApCfg \
     libwpa_client \
     hostapd \
-    wpa_supplicant \
-    wpa_supplicant.conf \
-    wcnss_service \
+    dhcpcd.conf \
     wificond \
-    wifilogd 
+    wpa_supplicant \
+    wpa_supplicant.conf
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/wifi/hostapd.accept:$(TARGET_COPY_OUT_VENDOR)/etc/hostapd/hostapd.accept \
-    $(LOCAL_PATH)/prebuilt/wifi/hostapd_default.conf:$(TARGET_COPY_OUT_VENDOR)/etc/hostapd/hostapd_default.conf \
-    $(LOCAL_PATH)/prebuilt/wifi/hostapd.deny:$(TARGET_COPY_OUT_VENDOR)/etc/hostapd/hostapd.deny \
     $(LOCAL_PATH)/prebuilt/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
     $(LOCAL_PATH)/prebuilt/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf 
 
 PRODUCT_COPY_FILES += \
-    kernel/lenovo/kuntao/drivers/staging/prima/firmware_bin/WCNSS_cfg.dat:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/prima/WCNSS_cfg.dat \
+	$(LOCAL_PATH)/prebuilt/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
     $(LOCAL_PATH)/prebuilt/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/prima/WCNSS_qcom_cfg.ini \
     $(LOCAL_PATH)/prebuilt/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/WCNSS_qcom_cfg.ini
 

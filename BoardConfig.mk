@@ -20,11 +20,6 @@ BOARD_VENDOR := lenovo-qcom
 
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
-# Boot animation
-TARGET_BOOTANIMATION_HALF_RES := true
-TARGET_SCREEN_HEIGHT := 1920
-TARGET_SCREEN_WIDTH := 1080
-
 # Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -50,7 +45,7 @@ TARGET_FS_CONFIG_GEN := $(LOCAL_PATH)/config.fs
 
 # Kernel
 BOARD_KERNEL_BASE := 0x80000000
-BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci 
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci 
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 BOARD_KERNEL_PAGESIZE :=  2048
@@ -125,6 +120,7 @@ QCOM_BT_READ_ADDR_FROM_PROP := true
 USE_DEVICE_SPECIFIC_CAMERA := true
 BOARD_QTI_CAMERA_32BIT_ONLY := true
 TARGET_TS_MAKEUP := true
+TARGET_USES_QTI_CAMERA_DEVICE := true
 
 # Charger
 BACKLIGHT_PATH := /sys/class/leds/lcd-backlight/brightness
@@ -157,18 +153,24 @@ WITH_DEXPREOPT := false
 TARGET_EXFAT_DRIVER := sdfat
 
 # Display
-OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
-TARGET_USES_GRALLOC1 := true
-TARGET_USES_ION := true
-TARGET_USES_HWC2 := true
-TARGET_USES_OVERLAY := true
-USE_OPENGL_RENDERER := true
-MAX_EGL_CACHE_KEY_SIZE := 12*1024
-MAX_EGL_CACHE_SIZE := 2048*1024
 MAX_VIRTUAL_DISPLAY_DIMENSION := 4096
 TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
-VSYNC_EVENT_PHASE_OFFSET_NS := 2000000
+
+TARGET_USES_ION := true
+TARGET_USES_NEW_ION_API :=true
+TARGET_USES_GRALLOC1 := true
+TARGET_USES_HWC2 := true
+TARGET_USES_OVERLAY := true
+
+MAX_EGL_CACHE_KEY_SIZE := 12*1024
+MAX_EGL_CACHE_SIZE := 2048*1024
+
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 SF_VSYNC_EVENT_PHASE_OFFSET_NS := 6000000
+VSYNC_EVENT_PHASE_OFFSET_NS := 2000000
+
+OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
+USE_OPENGL_RENDERER := true
 
 # Filesystem
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
@@ -194,9 +196,6 @@ TARGET_PROVIDES_KEYMASTER := true
 
 # Media
 TARGET_USES_MEDIA_EXTENSIONS := true
-
-# Fonts
-EXTENDED_FONT_FOOTPRINT := true
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
@@ -249,9 +248,6 @@ WIFI_DRIVER_FW_PATH_AP           := "ap"
 WIFI_DRIVER_FW_PATH_STA          := "sta"
 WIFI_DRIVER_FW_PATH_P2P          := "p2p"
 WPA_SUPPLICANT_VERSION           := VER_0_8_X
-
-# Hack for build
-TARGET_BLOBS_BYPASS_SYMBOL_ERR := true
 
 # Inherit from the proprietary version
 -include vendor/lenovo/kuntao/BoardConfigVendor.mk

@@ -66,6 +66,8 @@ ro.qualcomm.bluetooth.nap=true
 ro.bluetooth.sap=true
 ro.bluetooth.dun=true
 ro.qualcomm.bluetooth.map=true
+persist.bt.enableAptXHD=true
+
 
 # Camera
 camera.display.umax=1920x1080
@@ -73,6 +75,9 @@ camera.display.lmax=1280x720
 camera.hal1.packagelist=com.skype.raider,com.google.android.talk
 camera.lowpower.record.enable=1
 vidc.enc.dcvs.extra-buff-count=2
+persist.camera.HAL3.enabled=1
+vendor.camera.aux.packagelist=org.codeaurora.snapcam,com.android.camera,org.lineageos.snap
+
 
 # CNE
 persist.cne.feature=1
@@ -91,11 +96,14 @@ debug.sf.hw=0
 debug.egl.hw=0
 persist.hwc.mdpcomp.enable=true
 debug.mdpcomp.logs=0
-dalvik.vm.heapsize=36m
 dev.pm.dyn_samplingrate=1
 persist.demo.hdmirotationlock=false
 debug.enable.sglscale=1
 debug.gralloc.enable_fb_ubwc=1
+
+sdm.debug.disable_rotator_split=1
+sdm.debug.disable_skip_validate=1
+sdm.perf_hint_window=50
 
 #
 # system prop for opengles version
@@ -167,6 +175,17 @@ persist.radio.redir_party_num=1
 persist.vendor.radio.custom_ecc=1
 persist.vendor.radio.rat_on=combine
 persist.vendor.radio.sib16_support=1
+
+# RmNet Data
+persist.rmnet.data.enable=true
+persist.data.wda.enable=true
+persist.data.df.dl_mode=5
+persist.data.df.ul_mode=5
+persist.data.df.agg.dl_pkt=10
+persist.data.df.agg.dl_size=4096
+persist.data.df.mux_count=8
+persist.data.df.iwlan_mux=9
+persist.data.df.dev_name=rmnet_usb0
 
 # IMS
 persist.dbg.volte_avail_ovr=1

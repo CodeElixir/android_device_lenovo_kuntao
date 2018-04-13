@@ -193,7 +193,7 @@
     <hal format="hidl">
         <name>vendor.display.config</name>
         <transport>hwbinder</transport>
-        <version>1.1</version>
+        <version>1.0</version>
         <interface>
             <name>IDisplayConfig</name>
             <instance>default</instance>
@@ -235,16 +235,6 @@
         <interface>
             <name>IVibrator</name>
             <instance>default</instance>
-        </interface>
-    </hal>
-    <!-- CAMERA -->
-    <hal format="hidl">
-        <name>android.hardware.camera.provider</name>
-        <transport>hwbinder</transport>
-        <version>2.4</version>
-        <interface>
-            <name>ICameraProvider</name>
-            <instance>legacy/0</instance>
         </interface>
     </hal>
     <!-- AUDIO -->
@@ -346,15 +336,6 @@
         <version>2.0</version>
         <interface>
             <name>IMapper</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.graphics.composer</name>
-        <transport>hwbinder</transport>
-        <version>2.1</version>
-        <interface>
-            <name>IComposer</name>
             <instance>default</instance>
         </interface>
     </hal>
