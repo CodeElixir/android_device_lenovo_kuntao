@@ -30,6 +30,9 @@
 #include <stdlib.h>
 #include <sys/sysinfo.h>
 
+#define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
+#include <sys/_system_properties.h>
+
 #include <android-base/file.h>
 #include <android-base/properties.h>
 #include <android-base/strings.h>
