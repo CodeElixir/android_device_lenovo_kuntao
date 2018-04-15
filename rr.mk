@@ -19,13 +19,12 @@ $(call inherit-product, device/lenovo/kuntao/full_kuntao.mk)
 # Inherit RR's custom product configuration
 $(call inherit-product, vendor/rr/config/common_full_phone.mk)
 
+# Boot animation
+TARGET_SCREEN_WIDTH := 1080
+TARGET_SCREEN_HEIGHT := 1920
+
 PRODUCT_NAME := rr_kuntao
 BOARD_VENDOR := Lenovo
 
 PRODUCT_GMS_CLIENTID_BASE := android-lenovo
 
-PRODUCT_BUILD_PROP_OVERRIDES += \
-	    PRIVATE_BUILD_DESC="kuntao_row-user 7.0 NRD90N P2a42_S251_171107_ROW release-keys" 
-
-# Set BUILD_FINGERPRINT variable to be picked up by both system and vendor build.prop
-BUILD_FINGERPRINT := "Lenovo/kuntao_row/P2a42:7.0/NRD90N/P2a42_S251_171107_ROW:user/release-keys"

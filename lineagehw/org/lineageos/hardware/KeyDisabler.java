@@ -35,11 +35,11 @@ public class KeyDisabler {
     }
 
     public static boolean isActive() {
-        return Fingerprint.isNavEnabled();
+        return false;
     }
 
     public static boolean setActive(boolean state) {
     	Log.i("KeyDisabler", "setActive " + state);
-        return Fingerprint.enableNav(!state) == 0;
+        return false;
     }
 }
