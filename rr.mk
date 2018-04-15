@@ -19,7 +19,7 @@ $(call inherit-product, device/lenovo/kuntao/full_kuntao.mk)
 # Inherit RR's custom product configuration
 $(call inherit-product, vendor/rr/config/common_full_phone.mk)
 
-PRODUCT_NAME := lineage_kuntao
+PRODUCT_NAME := rr_kuntao
 BOARD_VENDOR := Lenovo
 
 PRODUCT_GMS_CLIENTID_BASE := android-lenovo
