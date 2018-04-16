@@ -16,14 +16,14 @@
 
 $(call inherit-product, device/lenovo/kuntao/full_kuntao.mk)
 
-# Inherit RR's custom product configuration
-$(call inherit-product, vendor/rr/config/common_full_phone.mk)
+# Inherit AICP's custom product configuration
+$(call inherit-product, vendor/aicp/config/common_full_phone.mk)
 
 # Boot animation
 TARGET_SCREEN_WIDTH := 1080
 TARGET_SCREEN_HEIGHT := 1920
 
-PRODUCT_NAME := rr_kuntao
+PRODUCT_NAME := aicp_kuntao
 BOARD_VENDOR := Lenovo
 
 PRODUCT_GMS_CLIENTID_BASE := android-lenovo
