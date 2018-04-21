@@ -39,7 +39,6 @@ on early-init
     chmod 0620 /dev/kmsg
 
 on init
-
     # Set permissions for persist partition
     mkdir /persist 0771 root system
 
@@ -65,6 +64,7 @@ on early-boot
     write /sys/kernel/boot_slpi/boot 1
     write /sys/kernel/boot_cdsp/boot 1
     chown root audio /sys/kernel/boot_adsp/boot
+    exec u:r:qti_init_shell:s0 -- /system/vendor/bin/init.qcom.early_boot.sh
 
 on boot
 	# Access permission for Bluetooth
@@ -120,6 +120,9 @@ on boot
     #Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
 
+    # Prevent permission denied error for telephony
+    chmod 0644 /proc/cmdline
+
     setprop wifi.interface wlan0
 
 #   Define TCP buffer sizes for various networks
@@ -135,21 +138,7 @@ on boot
     #Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip
 
-
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
-
-#   Define TCP buffer sizes for various networks
-#   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
-    setprop net.tcp.buffersize.default 4096,87380,524288,4096,16384,110208
-    setprop net.tcp.buffersize.lte     2097152,4194304,8388608,262144,524288,1048576
-    setprop net.tcp.buffersize.umts    4094,87380,110208,4096,16384,110208
-    setprop net.tcp.buffersize.hspa    4094,87380,1220608,4096,16384,1220608
-    setprop net.tcp.buffersize.hsupa   4094,87380,1220608,4096,16384,1220608
-    setprop net.tcp.buffersize.hsdpa   4094,87380,1220608,4096,16384,1220608
-    setprop net.tcp.buffersize.hspap   4094,87380,1220608,4096,16384,1220608
-    setprop net.tcp.buffersize.edge    4093,26280,35040,4096,16384,35040
-    setprop net.tcp.buffersize.gprs    4092,8760,11680,4096,8760,11680
-    setprop net.tcp.buffersize.evdo    4094,87380,524288,4096,16384,262144
 
     setprop net.tcp.2g_init_rwnd 10
 
@@ -157,28 +146,6 @@ on boot
 #   Increased technology maximums should be reflected here.
     write /proc/sys/net/core/rmem_max  8388608
     write /proc/sys/net/core/wmem_max  8388608
-
-    #To allow interfaces to get v6 address when tethering is enabled
-    write /proc/sys/net/ipv6/conf/rmnet0/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet1/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet2/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet3/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet4/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet5/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet6/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet7/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio0/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio1/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio2/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio3/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio4/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio5/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio6/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio7/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_usb0/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_usb1/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_usb2/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_usb3/accept_ra 2
 
     # To prevent out of order acknowledgements from making
     # connection tracking to treat them as not belonging to
@@ -188,77 +155,13 @@ on boot
     # an ack packet comes out of order
     write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
 
-    # Set the console loglevel to < KERN_INFO
-    # Set the default message loglevel to KERN_INFO
-    write /proc/sys/kernel/printk "6 6 1 7"
-
-    # Allow access for CCID command/response timeout configuration
-    chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
-
-    # Wifi firmware reload path
-    chown wifi wifi /sys/module/wlan/parameters/fwpath
-    
-    # bond0 used by FST Manager
-    chown wifi wifi /sys/class/net/bond0/bonding/queue_id
-
-  # FPC home button permissions
-    chown system system /sys/homebutton/enable
-    chown system system /sys/homebutton/enable_off
-    chown system system /sys/homebutton/haptic
-    chown system system /sys/homebutton/haptic_off
-    chown system system /sys/homebutton/proximity_check_off 
-    chown system system /sys/homebutton/key
-    chown system system /sys/homebutton/key_hold
-    chown system system /sys/homebutton/key_screenoff
-    chown system system /sys/homebutton/key_screenoff_hold
-
-    # Screen off Gestures
-    chown system radio /sys/board_properties/tpd_suspend_status
-    chmod 0660 /sys/board_properties/tpd_suspend_status
-
-
     # CPE fw_name used by sound trigger HAL
     chown media audio /sys/kernel/wcd_cpe0/fw_name
-
-on property:bluetooth.sap.status=running
-    start bt-sap
-
-on property:bluetooth.sap.status=stopped
-    stop bt-sap
-
-on property:bluetooth.dun.status=running
-    start bt-dun
-
-on property:bluetooth.dun.status=stopped
-    stop bt-dun
-
-on property:ro.bluetooth.ftm_enabled=true
-    start ftmd
-
-on property:bluetooth.startbtsnoop=true
-    start btsnoop
-
-on property:bluetooth.startbtsnoop=false
-    stop btsnoop
-
-    # Allow access to emmc rawdump block partition and dload sysfs node
-    chown root system /dev/block/bootdevice/by-name/rawdump -p /dev/block/
-    chmod 0660 /dev/block/bootdevice/by-name/rawdump -p /dev/block/
+ 
+    # Allow access to dload sysfs node
     chown root system /sys/kernel/dload/emmc_dload
     chmod 0660 /sys/kernel/dload/emmc_dload
 
-    chown root system /dev/block/bootdevice/by-name/ramdump -p /dev/block/
-    chmod 0660 /dev/block/bootdevice/by-name/ramdump -p /dev/block/
-    chown root system /sys/kernel/dload/dload_mode
-    chmod 0660 /sys/kernel/dload/dload_mode
-
-    chown wifi wifi /sys/module/wlan/parameters/fwpath
-
-    chown system system /sys/class/backlight/panel0-backlight/brightness
-    chown system system /sys/class/backlight/panel0-backlight/max_brightness
-
-    # Create directory used for display
-    mkdir /persist/display 0770 system graphics
 
 # msm specific files that need to be created on /data
 on post-fs-data
@@ -282,11 +185,6 @@ on post-fs-data
     mkdir /data/vendor/misc/qti_fp/bg_estimation 0770 system system
     mkdir /data/vendor/misc/qti_fp/calib_test 0770 system system
     mkdir /data/vendor/misc/qti_fp/database 0770 system system
-
-
-    # Begin, lenovo-sw liyuan8 20161223, for preload app
-    mkdir /data/app-lib2 0771 system system
-    # End, lenovo-sw liyuan8 20161223
     
     # Create directory for TZ Apps
     mkdir /data/misc/qsee 0770 system system
@@ -490,18 +388,11 @@ on post-fs-data
     mkdir /data/FTM_AP 0775 system system
 
 service perfd /system/vendor/bin/perfd
-   class main
-   user root
-   group root readproc
-   disabled
-   socket perfd seqpacket 0666 root system
-
-service iop /vendor/bin/iop
     class main
     user root
-    group root
+    group root readproc
     disabled
-    socket iop seqpacket 0666 root system
+    socket perfd seqpacket 0666 root system
 
 on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed "
@@ -512,15 +403,8 @@ on property:sys.boot_completed=1
     chown media audio /sys/kernel/wdsp0/boot
     chown media audio /sys/kernel/wcd_cpe0/fw_name
 
-#service qcom-c_main-sh /vendor/bin/init.class_main.sh
-#    class main
-#    user root
-#    oneshot
-
 on property:vold.decrypt=trigger_restart_framework
-    #start qcom-c_main-sh
     start wcnss-service
-    start cnss_diag
     start config_bt_addr
 
 on property:persist.env.fastdorm.enabled=true
@@ -560,35 +444,16 @@ on property:wc_transport.start_hci=false
 service start_hci_filter /system/vendor/bin/wcnss_filter
     class late_start
     user bluetooth
-    group bluetooth oem_2950
+    group bluetooth oem_2950 system wakelock
     disabled
 
-on property:wc_transport.start_root=true
-    start hci_filter_root
-
-on property:wc_transport.start_root=false
-    stop hci_filter_root
-
-# FM
-on property:hw.fm.init=0
-    write /sys/module/radio_iris_transport/parameters/fmsmd_set 0
-
-on property:hw.fm.init=1
-    write /sys/module/radio_iris_transport/parameters/fmsmd_set 1
-
-service hci_filter_root /vendor/bin/wcnss_filter
-    class late_start
-    user bluetooth
-    group bluetooth oem_2950 system
-    disabled
-
-service config_bt_addr /vendor/bin/btnvtool -O
+service config_bt_addr /system/vendor/bin/btnvtool -O
     class core
     user bluetooth
     group bluetooth radio
     oneshot
 
-service hciattach /system/vendor/bin/init.qcom.bt.sh 
+service hciattach /system/bin/hci_qcomm_init -e
     class late_start
     user bluetooth
     group bluetooth net_bt_admin
@@ -598,15 +463,38 @@ service hciattach /system/vendor/bin/init.qcom.bt.sh
 on property:bluetooth.hciattach=true
     start hciattach
 
-service btsnoop /vendor/bin/btsnoop
-   user bluetooth
-   group bluetooth net_bt_admin sdcard_rw sdcard_r media_rw
-   class late_start
-   disabled
-   oneshot
+on property:bluetooth.hciattach=false
+    setprop bluetooth.status off
+
+on property:wc_transport.start_root=true
+    start hci_filter_root
+
+on property:wc_transport.start_root=false
+    stop hci_filter_root
+
+service hci_filter_root /vendor/bin/wcnss_filter
+    class late_start
+    user bluetooth
+    group bluetooth oem_2950 system
+    disabled
+
+# FM
+on property:hw.fm.init=0
+    write /sys/module/radio_iris_transport/parameters/fmsmd_set 0
+
+on property:hw.fm.init=1
+    write /sys/module/radio_iris_transport/parameters/fmsmd_set 1
+
+service port-bridge /system/vendor/bin/port-bridge
+    class main
+    user radio system
+    group radio system inet
+    oneshot
 
 service netmgrd /system/vendor/bin/netmgrd
     class main
+    user root
+    group root wifi wakelock radio inet
 
 service ipacm-diag /system/vendor/bin/ipacm-diag
     class main
@@ -623,12 +511,6 @@ service qti /vendor/bin/qti
     class main
     user radio
     group radio net_raw oem_2950 usb net_admin
-
-service sensors /vendor/bin/sensors.qcom
-    class core
-    user root
-    group root
-    disabled
 
 on property:ro.use_data_netmgrd=false
     # netmgr not supported on specific target
@@ -656,12 +538,6 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     class main
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
-    oneshot
-
-service cnss_diag /vendor/bin/cnss_diag -q -f
-    class main
-    user system
-    group system wifi inet net_admin sdcard_rw media_rw diag
     oneshot
 
 service cnss-daemon /vendor/bin/cnss-daemon -n -l
@@ -716,12 +592,15 @@ service vendor.msm_irqbalance /vendor/bin/msm_irqbalance -f /system/vendor/etc/m
     class core
     user root
     group root
-    disabled
 
-on charger
-    setprop persist.sys.usb.config mass_storage
-    load_system_props
-    start qcom-post-boot
+service time_daemon /system/bin/time_daemon
+    class main
+    user root
+    group root
+
+on property:dev.bootcomplete=1
+    setprop sys.io.scheduler "bfq"
+        
 
 
 

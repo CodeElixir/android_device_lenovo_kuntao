@@ -148,9 +148,13 @@ PRODUCT_PACKAGES += \
     libtinyxml \
     libdisplayconfig \
     libqdMetaData.system \
-    libjni_livedisplay \
     vendor.display.config@1.0 \
-    vendor.display.config@1.0_vendor
+    vendor.display.config@1.0_vendor \
+    vendor.lineage.livedisplay@1.0-service-sdm \
+    vendor.lineage.livedisplay-V1.0-java
+
+PRODUCT_BOOT_JARS += \
+    vendor.lineage.livedisplay-V1.0-java
     
 # Graphic HAL
 PRODUCT_PACKAGES += \
@@ -311,8 +315,9 @@ PRODUCT_PACKAGES += \
 
 # Power HAL
 PRODUCT_PACKAGES += \
-     android.hardware.power@1.0-service-qti \
-     power.msm8953
+     android.hardware.power@1.0-service-qti 
+     
+     #power.msm8953
 
 # Lights
 PRODUCT_PACKAGES += \
@@ -353,8 +358,8 @@ PRODUCT_PACKAGES += \
 	init.class_main.sh \
 	init.qcom.sh \
 	init.qcom.post_boot.sh \
-	init.lenovo.persist.sh \
-	init.qcom.bt.sh
+	init.qcom.bt.sh \
+	init.qcom.post_boot
 
 # RIL
 PRODUCT_PACKAGES += \
