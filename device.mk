@@ -359,7 +359,7 @@ PRODUCT_PACKAGES += \
 	init.qcom.sh \
 	init.qcom.post_boot.sh \
 	init.qcom.bt.sh \
-	init.qcom.post_boot
+	init.qcom.early_boot
 
 # RIL
 PRODUCT_PACKAGES += \
