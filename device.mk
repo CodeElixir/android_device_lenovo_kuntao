@@ -147,10 +147,8 @@ PRODUCT_PACKAGES += \
     liboverlay \
     libtinyxml \
     libdisplayconfig \
-    libqdMetaData.system \
-    vendor.display.config@1.0 \
-    vendor.display.config@1.0_vendor 
-
+    libqdMetaData.system 
+    
 # LiveDisplay native
 PRODUCT_PACKAGES += \
     vendor.lineage.livedisplay@1.0-service-sdm \
