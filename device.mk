@@ -149,7 +149,10 @@ PRODUCT_PACKAGES += \
     libdisplayconfig \
     libqdMetaData.system \
     vendor.display.config@1.0 \
-    vendor.display.config@1.0_vendor \
+    vendor.display.config@1.0_vendor 
+
+# LiveDisplay native
+PRODUCT_PACKAGES += \
     vendor.lineage.livedisplay@1.0-service-sdm \
     vendor.lineage.livedisplay-V1.0-java
 
@@ -358,7 +361,7 @@ PRODUCT_PACKAGES += \
 	init.qcom.sh \
 	init.qcom.post_boot.sh \
 	init.qcom.bt.sh \
-	init.qcom.early_boot
+	init.qcom.early_boot.sh
 
 # RIL
 PRODUCT_PACKAGES += \
