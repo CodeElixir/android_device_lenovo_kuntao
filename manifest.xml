@@ -339,6 +339,15 @@
             <instance>default</instance>
         </interface>
     </hal>
+    <hal format="hidl">
+        <name>android.hardware.graphics.composer</name>
+        <transport>hwbinder</transport>
+        <version>2.1</version>
+        <interface>
+            <name>IComposer</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
     <!-- KEYMASTER -->
      <hal format="hidl"> 
         <name>android.hardware.keymaster</name>
@@ -478,6 +487,26 @@
         <interface>
             <name>IdpmQmi</name>
             <instance>dpmQmiService</instance>
+        </interface>
+    </hal>
+	<!-- Camera -->
+    <hal format="hidl">
+        <name>android.hardware.camera.provider</name>
+        <transport>hwbinder</transport>
+        <version>2.4</version>
+        <interface>
+            <name>ICameraProvider</name>
+            <instance>legacy/0</instance>
+        </interface>
+    </hal>
+    <!-- LIVE DISPLAY -->
+    <hal format="hidl">
+        <name>vendor.lineage.livedisplay</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IColor</name>
+            <instance>default</instance>
         </interface>
     </hal>
 </manifest>

@@ -24,11 +24,19 @@ DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay-lineage
 
 PRODUCT_ENFORCE_RRO_TARGETS := \
-    framework-res
+    Bluetooth \
+    Settings \
+    SettingsProvider \
+    SystemUI \
+    framework-res 
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
+
+# Boot animation
+TARGET_SCREEN_HEIGHT := 1920
+TARGET_SCREEN_WIDTH := 1080
 
 # HWUI overrides
 $(call inherit-product, frameworks/native/build/phone-xxhdpi-3072-hwui-memory.mk)
@@ -38,7 +46,7 @@ PRODUCT_PACKAGES += \
     LenovoDoze
     
 # Permissions
-#PRODUCT_COPY_FILES += \
+PRODUCT_COPY_FILES += \
     external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:system/etc/permissions/com.dsi.ant.antradio_library.xml \
 
 PRODUCT_COPY_FILES += \
@@ -77,7 +85,7 @@ PRODUCT_PACKAGES += \
      libbt-vendor
 
 # ANT+
-#PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES += \
     AntHalService \
     com.dsi.ant.antradio_library \
     libantradio
@@ -110,20 +118,20 @@ PRODUCT_PACKAGES += \
 
 # Audio configuration
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/prebuilt/etc/audio_policy.conf:system/etc/audio_policy.conf \
+	$(LOCAL_PATH)/prebuilt/etc/audio_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy.conf \
 	$(LOCAL_PATH)/prebuilt/etc/audio_output_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_output_policy.conf \
 	$(LOCAL_PATH)/prebuilt/etc/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
 	$(LOCAL_PATH)/prebuilt/etc/mixer_paths_mtp.xml:system/etc/mixer_paths_mtp.xml \
 	$(LOCAL_PATH)/prebuilt/etc/mixer_paths.xml:system/etc/mixer_paths.xml \
-	$(LOCAL_PATH)/prebuilt/etc/sound_trigger_mixer_paths.xml:system/etc/sound_trigger_mixer_paths.xml \
+	$(LOCAL_PATH)/prebuilt/etc/sound_trigger_mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_mixer_paths.xml \
 	$(LOCAL_PATH)/prebuilt/etc/sound_trigger_platform_info.xml:system/etc/sound_trigger_platform_info.xml \
-	$(LOCAL_PATH)/prebuilt/etc/audio_platform_info.xml:system/etc/audio_platform_info.xml \
-	$(LOCAL_PATH)/prebuilt/etc/aanc_tuning_mixer.txt:system/etc/aanc_tuning_mixer.txt \
+	$(LOCAL_PATH)/prebuilt/etc/audio_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info.xml \
+	$(LOCAL_PATH)/prebuilt/etc/aanc_tuning_mixer.txt:$(TARGET_COPY_OUT_VENDOR)/etc/aanc_tuning_mixer.txt \
 	$(LOCAL_PATH)/prebuilt/etc/audio_platform_info_extcodec.xml:system/etc/audio_platform_info_extcodec.xml 
 
 # XML Audio configuration files
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/prebuilt/etc/audio_policy_configuration.xml:system/etc/audio_policy_configuration.xml \
+	$(LOCAL_PATH)/prebuilt/etc/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
 	$(TOPDIR)frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
 	$(TOPDIR)frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
 	$(TOPDIR)frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
@@ -134,7 +142,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
 	camera.device@1.0-impl \
     android.hardware.camera.provider@2.4-impl \
-    camera.device@3.2-impl \
+    android.hardware.camera.provider@2.4-service \
+ 	camera.device@3.2-impl \
     camera.msm8953 \
     libmm-qcamera \
     Snap \
@@ -155,7 +164,7 @@ PRODUCT_PACKAGES += \
     vendor.display.config@1.0_vendor 
 
 # LiveDisplay native
-#PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES += \
     vendor.lineage.livedisplay@1.0-service-sdm 
 
 # Graphic HAL
@@ -163,8 +172,9 @@ PRODUCT_PACKAGES += \
      android.hardware.graphics.allocator@2.0-impl \
      android.hardware.graphics.allocator@2.0-service \
      android.hardware.graphics.composer@2.1-impl \
+     android.hardware.graphics.composer@2.1-service \
      android.hardware.graphics.mapper@2.0-impl \
-     android.hardware.configstore@1.0-service \
+     android.hardware.configstore@1.0-service 
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/qdcm_calib_data_mipi_mot_cmd_smd_1080p_549.xml:system/vendor/etc/qdcm_calib_data_mipi_mot_cmd_smd_1080p_549.xml
@@ -185,7 +195,8 @@ PRODUCT_PACKAGES += \
 
 # QCOM
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/privapp-permissions-qti.xml:system/etc/permissions/privapp-permissions-qti.xml 
+    $(LOCAL_PATH)/configs/privapp-permissions-qti.xml:system/etc/permissions/privapp-permissions-qti.xml \
+    $(LOCAL_PATH)/configs/qti_whitelist.xml:system/etc/sysconfig/qti_whitelist.xml
 
 # Ebtables
 PRODUCT_PACKAGES += \
@@ -255,7 +266,7 @@ PRODUCT_PACKAGES += \
 
 # IRQ
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/msm_irqbalance.conf:system/vendor/etc/msm_irqbalance.conf
+    $(LOCAL_PATH)/configs/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf
 
 # IRSC
 PRODUCT_COPY_FILES += \
@@ -268,24 +279,23 @@ PRODUCT_COPY_FILES += \
     
 # Media 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
-    $(LOCAL_PATH)/configs/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
+    $(LOCAL_PATH)/configs/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
+    $(LOCAL_PATH)/configs/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
  	$(LOCAL_PATH)/configs/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml
 
 PRODUCT_COPY_FILES += \
-    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
+    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml
 
 PRODUCT_PACKAGES += android.hardware.media.omx
 
 # NFC
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/nfc/libnfc-brcm.conf:system/vendor/etc/libnfc-brcm.conf \
-    $(LOCAL_PATH)/configs/nfc/libnfc-brcm-20797b00.conf:system/vendor/etc/libnfc-brcm-20797b00.conf \
-    $(LOCAL_PATH)/configs/nfc/nfcee_access.xml:system/etc/nfcee_access.xml \
-    $(LOCAL_PATH)/configs/nfc/nfcse.cfg:system/etc/nfcse.cfg \
-    $(LOCAL_PATH)/configs/nfc/nfc_wallet.conf:system/etc/nfc_wallet.conf
+    $(LOCAL_PATH)/configs/nfc/libnfc-brcm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-brcm.conf \
+    $(LOCAL_PATH)/configs/nfc/libnfc-brcm-20797b00.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-brcm-20797b00.conf \
+    $(LOCAL_PATH)/configs/nfc/nfcee_access.xml:$(TARGET_COPY_OUT_VENDOR)/etc/nfcee_access.xml \
+    $(LOCAL_PATH)/configs/nfc/nfcse.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/nfcse.cfg \
 
 PRODUCT_PACKAGES += \
     NfcNci \
@@ -301,6 +311,7 @@ PRODUCT_PACKAGES += \
 # OMX
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
+    libmm-omxcore \
     libOmxAacEnc \
     libOmxAmrEnc \
     libOmxCore \
@@ -309,10 +320,7 @@ PRODUCT_PACKAGES += \
     libOmxSwVencHevc \
     libOmxVdec \
     libOmxVenc \
-    libstagefrighthw \
-    libOmxVidcCommon \
-    libextmedia_jni \
-    libhypv_intercept 
+    libstagefrighthw
 
 # Power HAL
 PRODUCT_PACKAGES += \
@@ -341,7 +349,9 @@ PRODUCT_PACKAGES += \
 
 # IMS
 PRODUCT_PACKAGES += \
-    ims-ext-common \
+    telephony-ext
+
+PRODUCT_BOOT_JARS += \
     telephony-ext
 
 # Ramdisk
@@ -371,8 +381,8 @@ PRODUCT_PACKAGES += \
 
 # Sensors
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/sensors/hals.conf:system/vendor/etc/sensors/hals.conf \
-    $(LOCAL_PATH)/configs/sensors/sensor_def_qcomdev.conf:system/vendor/etc/sensors/sensor_def_qcomdev.conf
+    $(LOCAL_PATH)/configs/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf \
+    $(LOCAL_PATH)/configs/sensors/sensor_def_qcomdev.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/sensor_def_qcomdev.conf
 
  PRODUCT_PACKAGES += \
      android.hardware.sensors@1.0-impl

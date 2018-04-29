@@ -111,12 +111,6 @@ Prefix PrefixParser::getFirstPrefix() {
     return makeBlankPrefix(IP_FAM::INVALID);
 } /* getFirstPrefix */
 
-Prefix PrefixParser::getFirstPrefix(IP_FAM famHint) {
-    if (size() >= 1)
-        return mPrefixes[0];
-    return makeBlankPrefix(famHint);
-} /* getFirstPrefix */
-
 string PrefixParser::getLastErrAsStr() {
     return mLastErr;
 } /* getLastErrAsStr */
@@ -124,9 +118,6 @@ string PrefixParser::getLastErrAsStr() {
 
 /* ------------------------------ PRIVATE ----------------------------------- */
 bool PrefixParser::add(vector<string> in, IP_FAM famHint) {
-    if (in.size() == 0)
-        return false;
-
     for (size_t i = 0; i < in.size(); i++) {
         if (!add(in[i], famHint))
             return false;
@@ -135,11 +126,6 @@ bool PrefixParser::add(vector<string> in, IP_FAM famHint) {
 } /* add */
 
 bool PrefixParser::add(string in, IP_FAM famHint) {
-    if (in.length() == 0) {
-        mLastErr = "Failed to parse string, length = 0...";
-        return false;
-    }
-
     if (famHint == IP_FAM::INVALID)
         famHint = guessIPFamily(in);
 
@@ -152,10 +138,8 @@ bool PrefixParser::add(string in, IP_FAM famHint) {
     }
 
     int mask = parseSubnetMask(subnet, famHint);
-    if (!isMaskValid(mask, famHint)) {
-        mLastErr = "Invalid mask";
+    if (!isMaskValid(mask, famHint))
         return false;
-    }
 
     Prefix pre = makeBlankPrefix(famHint);
 
