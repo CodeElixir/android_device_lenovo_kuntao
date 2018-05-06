@@ -106,18 +106,9 @@ bool ipacm_logging = true;
 void ipa_is_ipacm_running(void);
 int ipa_get_if_index(char *if_name, int *if_index);
 
-IPACM_Neighbor *neigh;
-IPACM_IfaceManager *ifacemgr;
-
-#ifdef FEATURE_IPACM_HAL
-	IPACM_OffloadManager* OffloadMng;
-	HAL *hal;
-#endif
-
 /* start netlink socket monitor*/
 void* netlink_start(void *param)
 {
-	param = NULL;
 	ipa_nl_sk_fd_set_info_t sk_fdset;
 	int ret_val = 0;
 	memset(&sk_fdset, 0, sizeof(ipa_nl_sk_fd_set_info_t));
@@ -146,7 +137,6 @@ void* firewall_monitor(void *param)
 	ipacm_cmd_q_data evt_data;
 	uint32_t mask = IN_MODIFY | IN_MOVE;
 
-	param = NULL;
 	inotify_fd = inotify_init();
 	if (inotify_fd < 0)
 	{
@@ -242,14 +232,12 @@ void* ipa_driver_msg_notifier(void *param)
 	ipacm_event_data_wlan_ex *data_ex;
 	ipa_get_data_stats_resp_msg_v01 *data_tethering_stats = NULL;
 	ipa_get_apn_data_stats_resp_msg_v01 *data_network_stats = NULL;
-#ifdef FEATURE_L2TP
 	ipa_ioc_vlan_iface_info *vlan_info = NULL;
 	ipa_ioc_l2tp_vlan_mapping_info *mapping = NULL;
-#endif
+
 	ipacm_cmd_q_data new_neigh_evt;
 	ipacm_event_data_all* new_neigh_data;
 
-	param = NULL;
 	fd = open(IPA_DRIVER, O_RDWR);
 	if (fd < 0)
 	{
@@ -699,7 +687,6 @@ void* ipa_driver_msg_notifier(void *param)
 			if (OffloadMng->elrInstance == NULL) {
 				IPACMERR("OffloadMng->elrInstance is NULL, can't forward to framework!\n");
 			} else {
-				IPACMERR("calling OffloadMng->elrInstance->onLimitReached \n");
 				OffloadMng->elrInstance->onLimitReached();
 			}
 			continue;
@@ -709,20 +696,15 @@ void* ipa_driver_msg_notifier(void *param)
 			if (OffloadMng->elrInstance == NULL) {
 				IPACMERR("OffloadMng->elrInstance is NULL, can't forward to framework!\n");
 			} else {
-				IPACMERR("calling OffloadMng->elrInstance->onOffloadStopped \n");
 				OffloadMng->elrInstance->onOffloadStopped(IpaEventRelay::ERROR);
 			}
-			/* WA to clean up wlan instances during SSR */
-			evt_data.event = IPA_SSR_NOTICE;
-			evt_data.evt_data = NULL;
-			break;
+			continue;
 		case IPA_SSR_AFTER_POWERUP:
 			IPACMDBG_H("Received IPA_SSR_AFTER_POWERUP\n");
 			OffloadMng = IPACM_OffloadManager::GetInstance();
 			if (OffloadMng->elrInstance == NULL) {
 				IPACMERR("OffloadMng->elrInstance is NULL, can't forward to framework!\n");
 			} else {
-				IPACMERR("calling OffloadMng->elrInstance->onOffloadSupportAvailable \n");
 				OffloadMng->elrInstance->onOffloadSupportAvailable();
 			}
 			continue;
@@ -798,6 +780,7 @@ void* ipa_driver_msg_notifier(void *param)
 
 void IPACM_Sig_Handler(int sig)
 {
+	int cnt;
 	ipacm_cmd_q_data evt_data;
 
 	printf("Received Signal: %d\n", sig);
@@ -836,20 +819,17 @@ int main(int argc, char **argv)
 	int ret;
 	pthread_t netlink_thread = 0, monitor_thread = 0, ipa_driver_thread = 0;
 	pthread_t cmd_queue_thread = 0;
+	IPACM_OffloadManager* OffloadMng;
 
 	/* check if ipacm is already running or not */
 	ipa_is_ipacm_running();
 
 	IPACMDBG_H("In main()\n");
-	(void)argc;
-	(void)argv;
-
-	neigh = new IPACM_Neighbor();
-	ifacemgr = new IPACM_IfaceManager();
-
+	IPACM_Neighbor *neigh = new IPACM_Neighbor();
+	IPACM_IfaceManager *ifacemgr = new IPACM_IfaceManager();
 #ifdef FEATURE_IPACM_HAL
 	OffloadMng = IPACM_OffloadManager::GetInstance();
-	hal = HAL::makeIPAHAL(1, OffloadMng);
+	HAL *hal = HAL::makeIPAHAL(1, OffloadMng);
 	IPACMDBG_H(" START IPACM_OffloadManager and link to android framework\n");
 #endif
 

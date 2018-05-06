@@ -256,7 +256,7 @@
             <instance>default</instance>
         </interface>
     </hal>
-     <hal format="hidl"> 
+    <hal format="hidl">
         <name>android.hardware.soundtrigger</name>
         <transport>hwbinder</transport>
         <version>2.0</version>
@@ -264,7 +264,7 @@
             <name>ISoundTriggerHw</name>
             <instance>default</instance>
         </interface>
-    </hal> 
+    </hal>
     <hal format="hidl"> 
         <name>android.hardware.broadcastradio</name>
         <transport arch="32+64">passthrough</transport>
@@ -387,7 +387,7 @@
    <hal format="hidl">
         <name>android.hardware.wifi</name>
         <transport>hwbinder</transport>
-        <version>1.0</version>
+        <version>1.1</version>
         <interface>
             <name>IWifi</name>
             <instance>default</instance>
@@ -478,6 +478,25 @@
         <interface>
             <name>IdpmQmi</name>
             <instance>dpmQmiService</instance>
+        </interface>
+    </hal>
+    <!-- PERF -->
+    <hal format="hidl">
+        <name>vendor.qti.hardware.iop</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IIop</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.qti.hardware.perf</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IPerf</name>
+            <instance>default</instance>
         </interface>
     </hal>
 </manifest>
